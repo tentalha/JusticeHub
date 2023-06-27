@@ -1,5 +1,5 @@
-import { R4XX } from "API";
-import { getUserByEmail } from "../services";
+import { R2XX, R4XX } from "../API";
+import { createUser, getUserByEmail } from "../services";
 import { USER_ALREADY_EXIST } from "../constants";
 
 export const login = (req, res) => {
@@ -19,7 +19,14 @@ export const register = async (req, res, next) => {
         USER_ALREADY_EXIST.message
       );
     }
-    
+    await createUser(req.body);
+    return R2XX(
+      res,
+      201,
+      "SUCCESS",
+      "Resource registered successfully!",
+      req.body
+    );
   } catch (error) {
     next(error);
   }

@@ -1,7 +1,9 @@
 //In this file all the routes are merged and then exported as single route object.
 import { Router } from "express";
-import testRoute from "./test.routes";
+import testRoutes from "./test.routes";
+import authRoutes from "./auth.routes";
 // --------------------------------------------------------->>
 export const router = Router();
 
-router.use("/temp", testRoute);
+router.use("/temp", testRoutes);
+router.use("/auth", authRoutes);
