@@ -4,4 +4,4 @@ import testRoute from "./test.routes";
 // --------------------------------------------------------->>
 export const router = Router();
 
-router.use("/", testRoute);
+router.use("/temp", testRoute);

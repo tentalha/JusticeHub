@@ -1,15 +1,44 @@
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".src",
+//     "paths": {
+//       "configs": ["./configs"],
+//       "constants": ["./constants"],
+//       "controllers": ["./controllers"],
+//       "middlewares": ["./middlewares"],
+//       "models": ["./models"],
+//       "services": ["./services"],
+//       "routes": ["./routes"],
+//       "API": ["./API"]
+//     },
+//     "module": "es2022"
+//   },
+//   "exclude": ["node_modules"]
+// }
+
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "configs": ["./configs"],
-      "constants": ["./constants"],
-      "controllers": ["./controllers"],
-      "middlewares": ["./middlewares"],
-      "models": ["./models"],
-      "services": ["./services"],
-      "routes": ["./routes"]
+      "configs": ["./configs"]
     }
   },
-  "exclude": ["node_modules"]
+  "exclude": ["node_modules", "dist"]
 }
+
+// {
+//   "compilerOptions": {
+//     "baseUrl": ".",
+//     "paths": {
+//       "configs/*": ["./src/configs/*"],
+//       "constants/*": ["./src/constants/*"],
+//       "controllers/*": ["./src/controllers/*"],
+//       "middlewares/*": ["./src/middlewares/*"],
+//       "models/*": ["./src/models/*"],
+//       "services/*": ["./src/services/*"],
+//       "routes/*": ["./src/routes/*"],
+//       "API/*": ["./src/API/*"]
+//     }
+//   },
+//   "exclude": ["node_modules"]
+// }
