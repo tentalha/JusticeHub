@@ -3,7 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import { router } from "./routes";
 import { R5XX } from "./API";
-import './configs/dbConfig';
+import "./configs/dbConfig";
 // --------------------------------------------------->>
 const app = express();
 // --------------------------------------------------->>
@@ -21,7 +21,7 @@ app.use(express.json());
 app.use("/backend/api/", router);
 
 app.use((error, req, res, next) => {
-  R5XX(res, 500, "INTERNAL-SERVER-ERROR", null);
+  R5XX(res, 500, "INTERNAL-SERVER-ERROR", undefined, { error });
 });
 // --------------------------------------------------->>
 export default app;
