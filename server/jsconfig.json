@@ -1,6 +1,6 @@
 // {
 //   "compilerOptions": {
-//     "baseUrl": ".src",
+//     "baseUrl": "./src",
 //     "paths": {
 //       "configs": ["./configs"],
 //       "constants": ["./constants"],
@@ -9,7 +9,9 @@
 //       "models": ["./models"],
 //       "services": ["./services"],
 //       "routes": ["./routes"],
-//       "API": ["./API"]
+//       "API": ["./API"],
+//       "utils": ["./utils"],
+//       "bin": ["./bin"]
 //     },
 //     "module": "es2022"
 //   },

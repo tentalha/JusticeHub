@@ -27,3 +27,5 @@ export const NAME_INVALID = "Invalid name. Please enter a valid name.";
 export const ROLE_REQUIRED = "Role field is required.";
 
 export const ROLE_INVALID = "Invalid role. Please choose a valid role";
+
+export const LETTER_SPACES = "Name should only contain letters and spaces"

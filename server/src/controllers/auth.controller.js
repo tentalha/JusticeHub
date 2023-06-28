@@ -14,7 +14,7 @@ export const register = async (req, res, next) => {
     if (user) {
       return R4XX(
         res,
-        400,
+        409,
         USER_ALREADY_EXIST.type,
         USER_ALREADY_EXIST.message
       );

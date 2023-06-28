@@ -1,4 +1,5 @@
 import { User } from "../models";
+import { hashPassword } from "../utils";
 
 export const getUserByEmail = async (email) => {
   try {
@@ -9,11 +10,16 @@ export const getUserByEmail = async (email) => {
 };
 
 export const createUser = async (user) => {
-  let newUser = new User({
-    name: user?.name,
-    email: user?.email,
-    password: user?.password,
-    role: user?.role,
-  });
-  await newUser.save();
+  let hashPass = hashPassword(user?.password);
+  try {
+    let newUser = new User({
+      name: user?.name,
+      email: user?.email,
+      password: await hashPassword(user?.password), //hashing password before saving in db.
+      role: user?.role,
+    });
+    await newUser.save();
+  } catch (error) {
+    throw Promise.reject(error);
+  }
 };
