@@ -5,12 +5,11 @@ export const getUserByEmail = async (email) => {
   try {
     return await User.findOne({ email });
   } catch (error) {
-    throw error;
+    return error;
   }
 };
 
 export const createUser = async (user) => {
-  let hashPass = hashPassword(user?.password);
   try {
     let newUser = new User({
       name: user?.name,
@@ -20,6 +19,6 @@ export const createUser = async (user) => {
     });
     await newUser.save();
   } catch (error) {
-    throw Promise.reject(error);
+    return Promise.reject(error);
   }
 };

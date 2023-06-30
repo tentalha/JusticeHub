@@ -14,6 +14,7 @@ export default defineConfig({
       schema: "/src/schema",
       services: "/src/services",
       store: "/src/store",
+      pages: "/src/pages",
       routes: "/src/routes",
       helpers: "/src/helpers",
     },

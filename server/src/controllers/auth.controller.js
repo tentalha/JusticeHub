@@ -1,10 +1,32 @@
 import { R2XX, R4XX } from "../API";
 import { createUser, getUserByEmail } from "../services";
 import { USER_ALREADY_EXIST } from "../constants";
+import { issueJWT, verifyPassword } from "../utils";
 
-export const login = (req, res) => {
+export const login = async (req, res, next) => {
   try {
-  } catch (error) {}
+    const { email, password } = req.body;
+    const user = await getUserByEmail(email);
+    // -------------------------------------------------------------------------->>
+    if (!user) {
+      return R4XX(res, 401, "UN-AUTHORIZED", `${email} is unauthorized!`);
+    }
+    // -------------------------------------------------------------------------->>
+    let isVerify = await verifyPassword(password, user?.password);
+    if (!isVerify) {
+      return R4XX(res, 401, "UN-AUTHORIZED", `${email} is unauthorized!`);
+    }
+
+    let jwt = issueJWT(user, "24h");
+    return R2XX(res, 200, "SUCCESS", "User logged in successfully.", {
+      user,
+      jwt,
+    });
+    
+  } catch (error) {
+    console.log(error);
+    next(error);
+  }
 };
 
 export const register = async (req, res, next) => {
