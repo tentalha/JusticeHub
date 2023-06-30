@@ -16,15 +16,14 @@ export const login = async (req, res, next) => {
     if (!isVerify) {
       return R4XX(res, 401, "UN-AUTHORIZED", `${email} is unauthorized!`);
     }
-
-    let jwt = issueJWT(user, "24h");
+    // -------------------------------------------------------------------------->>
+    let jwt = issueJWT(user, "2h");
+    
     return R2XX(res, 200, "SUCCESS", "User logged in successfully.", {
       user,
       jwt,
     });
-    
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };

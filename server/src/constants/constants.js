@@ -1,6 +1,6 @@
 export const userTypes = ["citizen", "operator", "investigator", "admin"];
 
-export const registerRequiredFeilds = ["name", "email", "password", "role"];
+export const registerRequiredFields = ["name", "email", "password", "role"];
 
 export const USER_ALREADY_EXIST = {
   type: "USER-ALREADY-EXIST",
