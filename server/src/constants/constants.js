@@ -1,10 +1,12 @@
 export const userTypes = ["citizen", "operator", "investigator", "admin"];
 
+export const firStatuses = ["pending", "active", "completed", "closed"];
+
 export const registerRequiredFields = ["name", "email", "password", "role"];
 
 export const USER_ALREADY_EXIST = {
-  type: "USER-ALREADY-EXIST",
-  message: "User with this email already exists!",
+  type: "RESOURCE-ALREADY-EXIST",
+  message: "RESOURCE with this email already exists!",
 };
 
 export const PASSWORD_REQUIRED = "Password field is required.";
@@ -22,10 +24,14 @@ export const EMAIL_NOT_EXIST = "USER NOT FOUND";
 
 export const NAME_REQUIRED = "Name field is required.";
 
+export const CNIC_REQUIRED = "CNIC field is required.";
+
+export const CNIC_INVALID = "Invalid CNIC. Please enter a valid CNIC.";
+
 export const NAME_INVALID = "Invalid name. Please enter a valid name.";
 
 export const ROLE_REQUIRED = "Role field is required.";
 
 export const ROLE_INVALID = "Invalid role. Please choose a valid role";
 
-export const LETTER_SPACES = "Name should only contain letters and spaces"
+export const LETTER_SPACES = "Name should only contain letters and spaces";

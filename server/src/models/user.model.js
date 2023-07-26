@@ -21,6 +21,11 @@ const userSchema = new Schema(
       enum: userTypes,
       default: "citizen",
     },
+    CNIC: {
+      type: String,
+      required: true,
+      unique: true,
+    },
   },
   {
     timestamps: true,

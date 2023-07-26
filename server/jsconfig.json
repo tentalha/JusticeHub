@@ -22,25 +22,9 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "configs": ["./configs"]
+      "configs": ["./configs"],
+      "bin": ["./bin"]
     }
   },
-  "exclude": ["node_modules", "dist"]
+  "exclude": ["node_modules"]
 }
-
-// {
-//   "compilerOptions": {
-//     "baseUrl": ".",
-//     "paths": {
-//       "configs/*": ["./src/configs/*"],
-//       "constants/*": ["./src/constants/*"],
-//       "controllers/*": ["./src/controllers/*"],
-//       "middlewares/*": ["./src/middlewares/*"],
-//       "models/*": ["./src/models/*"],
-//       "services/*": ["./src/services/*"],
-//       "routes/*": ["./src/routes/*"],
-//       "API/*": ["./src/API/*"]
-//     }
-//   },
-//   "exclude": ["node_modules"]
-// }

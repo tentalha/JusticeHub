@@ -1,7 +1,7 @@
 import { R2XX, R4XX } from "../API";
-import { createUser, getUserByEmail } from "../services";
+import { createUser, getUserByCNIC, getUserByEmail } from "../services";
 import { USER_ALREADY_EXIST } from "../constants";
-import { issueJWT, verifyPassword } from "../utils";
+import { issueJWT, sanitizeUser, verifyPassword } from "../utils";
 
 export const login = async (req, res, next) => {
   try {
@@ -11,16 +11,16 @@ export const login = async (req, res, next) => {
     if (!user) {
       return R4XX(res, 401, "UN-AUTHORIZED", `${email} is unauthorized!`);
     }
-    // -------------------------------------------------------------------------->>
     let isVerify = await verifyPassword(password, user?.password);
+    // -------------------------------------------------------------------------->>
     if (!isVerify) {
       return R4XX(res, 401, "UN-AUTHORIZED", `${email} is unauthorized!`);
     }
     // -------------------------------------------------------------------------->>
     let jwt = issueJWT(user, "2h");
-    
+
     return R2XX(res, 200, "SUCCESS", "User logged in successfully.", {
-      user,
+      user: sanitizeUser(user),
       jwt,
     });
   } catch (error) {
@@ -30,7 +30,8 @@ export const login = async (req, res, next) => {
 
 export const register = async (req, res, next) => {
   try {
-    const { email } = req.body;
+    const { email, CNIC } = req.body;
+    // -------------------------------------------------------------------------->>
     const user = await getUserByEmail(email);
     if (user) {
       return R4XX(
@@ -40,6 +41,17 @@ export const register = async (req, res, next) => {
         USER_ALREADY_EXIST.message
       );
     }
+    // -------------------------------------------------------------------------->>
+    const _user = await getUserByCNIC(CNIC);
+    if (_user) {
+      return R4XX(
+        res,
+        409,
+        USER_ALREADY_EXIST.type,
+        "Resource with this CNIC already exist."
+      );
+    }
+    // -------------------------------------------------------------------------->>
     await createUser(req.body);
     return R2XX(
       res,
