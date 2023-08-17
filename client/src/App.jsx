@@ -1,12 +1,21 @@
-import { Home } from 'pages'
+import React from "react"
+import SignUp from "./Components/signUp"
+import Login from "./Components/login"
+
+import { BrowserRouter, Route, Routes } from "react-router-dom"
 
 const App = () => {
   return (
     <>
-      <h1 className="text-red text-xl text-center mt-10">Justice Hub</h1>
-      <div className="text-center">
-        <Home />
-      </div>
+      <BrowserRouter>
+      
+      <Routes>
+        <Route path="/" element = {<SignUp />}></Route>
+        <Route path="/login" element = {<Login />}></Route>
+      </Routes>
+
+      
+      </BrowserRouter>
     </>
   )
 }
