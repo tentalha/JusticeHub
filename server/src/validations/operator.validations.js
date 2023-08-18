@@ -9,12 +9,13 @@ import {
   PASSWORD_INVALID,
   PASSWORD_REQUIRED,
 } from "../constants";
+import mongoose from "mongoose";
+import { body, param } from "express-validator";
 
-import { body } from "express-validator";
-
-export const registerValidationRules = () => {
+export const resourceCreationValidationRules = (role) => {
   return [
     body("email", EMAIL_REQUIRED)
+      .notEmpty()
       .trim()
       .isEmail()
       .withMessage(EMAIL_INVALID)
@@ -38,18 +39,22 @@ export const registerValidationRules = () => {
       .isString()
       .matches(/^\d{5}-\d{7}-\d{1}$/)
       .withMessage(CNIC_INVALID),
-  ];
-};
-
-export const loginValidationRules = () => {
-  return [
-    body("email")
+    body("role")
       .notEmpty()
-      .withMessage(EMAIL_REQUIRED)
-      .trim()
-      .isEmail()
-      .withMessage(EMAIL_INVALID),
-    body("password").notEmpty().withMessage(PASSWORD_REQUIRED),
+      .withMessage("Role required")
+      .isString()
+      .withMessage("Role must be a string")
+      .isIn(role)
+      .withMessage("Invalid role"),
   ];
 };
 
+export const mongoIdValidation = () => {
+  return [
+    param("id")
+      .notEmpty()
+      .withMessage("Id is required in query params")
+      .custom((value) => mongoose.Types.ObjectId.isValid(value))
+      .withMessage("Invalid Id mentioned in query"),
+  ];
+};
