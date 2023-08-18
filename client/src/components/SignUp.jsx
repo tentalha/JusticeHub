@@ -1,63 +1,63 @@
-import React, { useState } from 'react';
+import { useState } from 'react'
 //import { useDispatch } from 'react-redux';
 //import { createUser } from '../features/userDetailsSlice';
 //import { useNavigate } from 'react-router-dom';
 
-function SignUp() {
-  const [citizenInfo, setCitizenInfo] = useState({});
-  const [errors, setErrors] = useState({});
+export const SignUp = () => {
+  const [citizenInfo, setCitizenInfo] = useState({})
+  const [errors, setErrors] = useState({})
 
   //const dispatch = useDispatch();
   //const navigate = useNavigate();
 
   const getUserData = (e) => {
-    setCitizenInfo({ ...citizenInfo, [e.target.name]: e.target.value });
-    
-  };
+    setCitizenInfo({ ...citizenInfo, [e.target.name]: e.target.value })
+  }
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
 
     // Perform validation
-    const validationErrors = {};
+    const validationErrors = {}
     if (!citizenInfo.name) {
-      validationErrors.name = 'Name is required';
+      validationErrors.name = 'Name is required'
     }
     if (!citizenInfo.email) {
-      validationErrors.email = 'Email is required';
+      validationErrors.email = 'Email is required'
     } else if (!citizenInfo.email.includes('@')) {
-      validationErrors.email = 'Invalid email address';
+      validationErrors.email = 'Invalid email address'
     }
     if (!citizenInfo.password) {
-      validationErrors.password = 'password is required';
-    }
-    else if(citizenInfo.password.length < 8){
-      validationErrors.password = 'password is too short';
+      validationErrors.password = 'password is required'
+    } else if (citizenInfo.password.length < 8) {
+      validationErrors.password = 'password is too short'
     }
     if (!citizenInfo.CNIC) {
-      validationErrors.CNIC = 'CNIC is required';
-    }
-    else if(citizenInfo.CNIC.length != 13){
-      validationErrors.CNIC = 'Enter a Valid CNIC';
+      validationErrors.CNIC = 'CNIC is required'
+    } else if (citizenInfo.CNIC.length != 13) {
+      validationErrors.CNIC = 'Enter a Valid CNIC'
     }
 
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+      setErrors(validationErrors)
     } else {
-      setErrors({}); // Clear any existing errors
+      setErrors({}) // Clear any existing errors
       //dispatch(createUser(citizenInfo));
       //navigate("/read");
     }
 
-    console.log(citizenInfo);
-  };
+    console.log(citizenInfo)
+  }
 
   return (
     <div className="max-w-md mx-auto mt-8 p-6 bg-gray-100 rounded-lg shadow-lg">
       <h2 className="text-2xl font-semibold mb-4">Registration Form</h2>
       <form>
         <div className="mb-4">
-          <label htmlFor="name" className="block text-gray-700 font-semibold mb-2">
+          <label
+            htmlFor="name"
+            className="block text-gray-700 font-semibold mb-2"
+          >
             Name
           </label>
           <input
@@ -85,7 +85,10 @@ function SignUp() {
           {errors.email && <p className="text-red-500">{errors.email}</p>}
         </div>
         <div className="mb-4">
-          <label htmlFor="age" className="block text-gray-700 font-semibold mb-2">
+          <label
+            htmlFor="age"
+            className="block text-gray-700 font-semibold mb-2"
+          >
             Password
           </label>
           <input
@@ -99,11 +102,14 @@ function SignUp() {
           {errors.password && <p className="text-red-500">{errors.password}</p>}
         </div>
         <div className="mb-4">
-          <label htmlFor="age" className="block text-gray-700 font-semibold mb-2">
+          <label
+            htmlFor="age"
+            className="block text-gray-700 font-semibold mb-2"
+          >
             CNIC
           </label>
-          <input 
-            type='text'
+          <input
+            type="text"
             id="CNIC"
             name="CNIC"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
@@ -123,7 +129,5 @@ function SignUp() {
         </div>
       </form>
     </div>
-  );
+  )
 }
-
-export default SignUp;
