@@ -46,7 +46,6 @@ export const postOperator = async (req, res, next) => {
     await createOperator(req.body);
     R2XX(res, 201, "SUCCESS", "Operator created successfully", req.body);
   } catch (error) {
-    console.log(error);
     next(error);
   }
 };
