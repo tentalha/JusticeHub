@@ -1,14 +1,17 @@
 import { useState } from 'react'
-//import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 //import { createUser } from '../features/userDetailsSlice';
-//import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import signUpUser from 'features/thunk/signUpUser';
+import InputMask from 'react-input-mask';
 
 export const SignUp = () => {
   const [citizenInfo, setCitizenInfo] = useState({})
   const [errors, setErrors] = useState({})
 
-  //const dispatch = useDispatch();
-  //const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const getUserData = (e) => {
     setCitizenInfo({ ...citizenInfo, [e.target.name]: e.target.value })
@@ -34,7 +37,7 @@ export const SignUp = () => {
     }
     if (!citizenInfo.CNIC) {
       validationErrors.CNIC = 'CNIC is required'
-    } else if (citizenInfo.CNIC.length != 13) {
+    } else if (citizenInfo.CNIC.length != 15) {
       validationErrors.CNIC = 'Enter a Valid CNIC'
     }
 
@@ -42,18 +45,21 @@ export const SignUp = () => {
       setErrors(validationErrors)
     } else {
       setErrors({}) // Clear any existing errors
-      //dispatch(createUser(citizenInfo));
-      //navigate("/read");
+      dispatch(signUpUser(citizenInfo));
+      
     }
 
     console.log(citizenInfo)
   }
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-gray-100 rounded-lg shadow-lg">
-      <h2 className="text-2xl font-semibold mb-4">Registration Form</h2>
+    <>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-500 via-purple-400  to-purple-300">
+    
+    <div className="max-w-lg w-full mx-4 p-6 bg-gray-100 rounded-lg shadow-lg">
+      <h2 className="text-2xl font-bold mb-4 text-center">Hey, Register Here!</h2>
       <form>
-        <div className="mb-4">
+        <div className="mt-4 mb-4">
           <label
             htmlFor="name"
             className="block text-gray-700 font-semibold mb-2"
@@ -65,20 +71,20 @@ export const SignUp = () => {
             id="name"
             name="name"
             className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
-            placeholder="Enter your name"
+            placeholder="Enter your full name"
             onChange={getUserData}
           />
           {errors.name && <p className="text-red-500">{errors.name}</p>}
         </div>
         <div className="mb-4">
-          <label htmlFor="email" className="text-gray-700 font-semibold mb-2">
+          <label htmlFor="email" className="text-gray-700 font-semibold">
             Email
           </label>
           <input
             type="email"
             id="email"
             name="email"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
+            className="w-full mt-2 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
             placeholder="Enter your email"
             onChange={getUserData}
           />
@@ -86,7 +92,7 @@ export const SignUp = () => {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="age"
+            htmlFor="password"
             className="block text-gray-700 font-semibold mb-2"
           >
             Password
@@ -103,31 +109,39 @@ export const SignUp = () => {
         </div>
         <div className="mb-4">
           <label
-            htmlFor="age"
+            htmlFor="CNIC"
             className="block text-gray-700 font-semibold mb-2"
           >
             CNIC
           </label>
-          <input
-            type="text"
-            id="CNIC"
-            name="CNIC"
-            className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
-            placeholder="Enter atleat 8 characters long password"
-            onChange={getUserData}
-          />
+          <InputMask
+             mask="99999-9999999-9"
+             id="CNIC"
+             name="CNIC"
+             className={'w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring'}
+             placeholder="Enter CNIC (00000-0000000-0)"
+             onChange={getUserData}
+        
+      />
           {errors.CNIC && <p className="text-red-500">{errors.CNIC}</p>}
         </div>
-        <div className="flex justify-end">
+        <div className="flex justify-center">
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            className=" font-bold px-4 py-2 bg-black text-white rounded-lg hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
             onClick={handleSubmit}
           >
             Submit
           </button>
         </div>
       </form>
+      <div className="flex justify-center mt-4 ">
+          <Link to ="/login"className=" text-cyan-700 mr-4 text-blue-500 hover:underline">
+            Already have an account? Login
+          </Link>
+        </div>
     </div>
+    </div>
+    </>
   )
 }
