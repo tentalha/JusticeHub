@@ -11,7 +11,7 @@ export const login = async (req, res, next) => {
     if (!user) {
       return R4XX(res, 401, "UN-AUTHORIZED", `${email} is unauthorized!`);
     }
-    let isVerify = await verifyPassword(password, user?.password);
+    let isVerify = await verifyPassword(password.toString(), user?.password);
     // -------------------------------------------------------------------------->>
     if (!isVerify) {
       return R4XX(res, 401, "UN-AUTHORIZED", `${email} is unauthorized!`);
@@ -24,6 +24,7 @@ export const login = async (req, res, next) => {
       jwt,
     });
   } catch (error) {
+    console.log(error);
     next(error);
   }
 };
@@ -53,13 +54,9 @@ export const register = async (req, res, next) => {
     }
     // -------------------------------------------------------------------------->>
     await createUser(req.body);
-    return R2XX(
-      res,
-      201,
-      "SUCCESS",
-      "Resource registered successfully!",
-      req.body
-    );
+    return R2XX(res, 201, "SUCCESS", "Resource registered successfully!", {
+      user: sanitizeUser(req.body),
+    });
   } catch (error) {
     next(error);
   }

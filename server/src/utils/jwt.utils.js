@@ -24,7 +24,16 @@ export const issueJWT = (data, expiresIn) => {
 // -------------------------------------------------------------------->>
 
 export const verifyToken = (token) => {
-  return jwt.verify(token, ACCESS_PUB_KEY, { algorithms: ["RS256"] });
+  return jwt.verify(
+    token,
+    ACCESS_PUB_KEY,
+    { algorithms: ["RS256"] },
+    (err, decoded) => {
+      if (!err) {
+        return decoded;
+      }
+    }
+  );
 };
 
 // -------------------------------------------------------------------->>

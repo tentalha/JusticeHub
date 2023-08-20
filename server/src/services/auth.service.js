@@ -5,7 +5,7 @@ export const getUserByEmail = async (email) => {
   try {
     return await User.findOne({ email });
   } catch (error) {
-    return error;
+    return Promise.reject(error);
   }
 };
 
@@ -24,7 +24,7 @@ export const createUser = async (user) => {
       email: user?.email,
       password: await hashPassword(user?.password), //hashing password before saving in db.
       role: user?.role,
-      CNIC: user?.CNIC
+      CNIC: user?.CNIC,
     });
     await newUser.save();
   } catch (error) {

@@ -11,7 +11,9 @@ export const isLoggedIn = (req, res, next) => {
   }
 
   try {
-    verifyToken(jwt);
+    let decoded = verifyToken(jwt);
+    req.role = decoded?.role;
+    req.user = decoded?.sub;
     next();
   } catch (error) {
     R4XX(res, 401, "AUTHENTICATION-ERROR", "Invalid or expired auth token.");
