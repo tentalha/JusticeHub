@@ -1,17 +1,20 @@
-import { Login, SignUp, Dashboard } from 'components'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
-
+import { useEffect } from 'react'
+import { AllRoutes } from 'routes'
+import { ToastContainer } from 'react-toastify'
+import { Routes, Route } from 'react-router-dom'
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
+  useEffect(() => {
+    //Persist user auth logic
+  }, [])
+
   return (
     <>
-      <BrowserRouter>
       <Routes>
-          <Route path="/" element={<SignUp />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/dashboard" element={<Dashboard />}></Route>
+        <Route path="/*" element={<AllRoutes />} />
       </Routes>
-      </BrowserRouter>
+      <ToastContainer />
     </>
   )
 }

@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     watch: {
       usePolling: true,
-    }
+    },
   },
   resolve: {
     alias: {
@@ -22,6 +22,7 @@ export default defineConfig({
       pages: "/src/pages",
       routes: "/src/routes",
       helpers: "/src/helpers",
+      errors: "/src/errors",
     },
   },
 });
