@@ -1,14 +1,16 @@
-import { Login, SignUp } from 'components'
+import { Login, SignUp, Dashboard } from 'components'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
+
 
 const App = () => {
   return (
     <>
       <BrowserRouter>
-        <Routes>
+      <Routes>
           <Route path="/" element={<SignUp />}></Route>
           <Route path="/login" element={<Login />}></Route>
-        </Routes>
+          <Route path="/dashboard" element={<Dashboard />}></Route>
+      </Routes>
       </BrowserRouter>
     </>
   )
