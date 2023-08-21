@@ -53,9 +53,12 @@ export const register = async (req, res, next) => {
       );
     }
     // -------------------------------------------------------------------------->>
-    await createUser(req.body);
+    const newUser = await createUser(req.body);
+    let jwt = issueJWT(newUser, "2h");
+
     return R2XX(res, 201, "SUCCESS", "Resource registered successfully!", {
-      user: sanitizeUser(req.body),
+      user: sanitizeUser(newUser),
+      jwt,
     });
   } catch (error) {
     next(error);

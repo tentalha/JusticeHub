@@ -32,6 +32,7 @@ export const verifyToken = (token) => {
       if (!err) {
         return decoded;
       }
+      throw err;
     }
   );
 };
