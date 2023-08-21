@@ -23,6 +23,7 @@ export default defineConfig({
       routes: "/src/routes",
       helpers: "/src/helpers",
       errors: "/src/errors",
+      hooks: "/src/hooks",
     },
   },
 });

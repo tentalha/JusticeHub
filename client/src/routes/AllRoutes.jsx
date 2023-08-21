@@ -1,7 +1,11 @@
 import { Route, Routes } from 'react-router-dom'
-import { Login, SignUp, Dashboard } from 'components'
+import { Login, SignUp, Dashboard, Protected } from 'components'
+import { useCheckUserAuthState } from 'hooks'
 
 export const AllRoutes = () => {
+  //For checking user auth state
+  useCheckUserAuthState()
+
   return (
     <Routes>
       <Route>
@@ -9,8 +13,9 @@ export const AllRoutes = () => {
         <Route path="/login" element={<Login />} />
       </Route>
       {/* Private Routes */}
-      <Route element>
+      <Route element={<Protected />}>
         <Route path="/" element={<Dashboard />} />
+        <Route path="/hello" element={<h1>hi</h1>} />
       </Route>
     </Routes>
   )
