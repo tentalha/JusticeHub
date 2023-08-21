@@ -19,6 +19,7 @@ const userSlice = createSlice({
         state.loading = false;
       })
       .addCase(signInUser.pending, (state) => {
+        state.error = null;
         state.loading = true;
       })
       .addCase(signInUser.rejected, (state, { payload: error }) => {

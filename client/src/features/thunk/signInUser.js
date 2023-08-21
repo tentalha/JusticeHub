@@ -8,7 +8,6 @@ export const signInUser = createAsyncThunk(
       const response = await login_user(data);
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
