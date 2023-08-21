@@ -27,6 +27,7 @@ export const createUser = async (user) => {
       CNIC: user?.CNIC,
     });
     await newUser.save();
+    return newUser;
   } catch (error) {
     return Promise.reject(error);
   }
