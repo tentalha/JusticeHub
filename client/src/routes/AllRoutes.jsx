@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
-import { Login, SignUp, Dashboard, Protected } from 'components'
+import { Login, SignUp, Dashboard } from 'pages'
+import { Protected } from 'components'
 import { useCheckUserAuthState } from 'hooks'
 
 export const AllRoutes = () => {
