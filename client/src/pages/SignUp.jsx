@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -5,7 +6,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { signUpUser } from 'features'
 import InputMask from 'react-input-mask'
 import { useForm } from 'react-hook-form'
-import { useEffect } from 'react'
 import { registerSchema } from 'schema'
 import { toast } from 'react-toastify'
 

@@ -1,20 +1,32 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { me } from "services";
+import { useSelector, useDispatch } from "react-redux";
+import { setUser } from "features/slices/userSlice";
 
 export const useCheckUserAuthState = () => {
-  const jwt = localStorage.getItem("jwt");
   const navigate = useNavigate();
-  console.log("herer");
+  const dispatch = useDispatch();
+  const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    jwt ? checkForAuth() : navigate("/login");
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      checkForAuth();
+    }
   }, []);
 
   const checkForAuth = async () => {
-    const response = await me();
-    if (response.status == 401) {
-      navigate("/login");
+    try {
+      if (!Object.keys(user).length) {
+        const userData = (await me())?.data?.payload;
+        dispatch(setUser(userData?.user));
+      }
+    } catch (error) {
+      if (error?.response?.status == 401) {
+        navigate("/login");
+      }
     }
   };
+  return null;
 };

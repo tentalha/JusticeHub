@@ -1,6 +1,14 @@
 import { User } from "../models";
 import { hashPassword } from "../utils";
 
+export const getUserById = async (id) => {
+  try {
+    return await User.findOne({ _id: id });
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
 export const getUserByEmail = async (email) => {
   try {
     return await User.findOne({ email });
