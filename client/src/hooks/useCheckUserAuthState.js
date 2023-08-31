@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { me } from "services";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "features/slices/userSlice";
+import { retrieveJWT } from "helpers";
 
 export const useCheckUserAuthState = () => {
   const navigate = useNavigate();
@@ -10,15 +11,14 @@ export const useCheckUserAuthState = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
-    const jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      checkForAuth();
-    }
+    const jwt = retrieveJWT();
+    //If JWT exists then check if it is valid otherwise navigate to login page
+    jwt ? checkForAuth() : navigate("/login");
   }, []);
 
   const checkForAuth = async () => {
     try {
-      if (!Object.keys(user).length) {
+      if (!Object.keys(user)?.length) {
         const userData = (await me())?.data?.payload;
         dispatch(setUser(userData?.user));
       }
@@ -28,5 +28,4 @@ export const useCheckUserAuthState = () => {
       }
     }
   };
-  return null;
 };

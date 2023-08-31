@@ -1,5 +1,6 @@
 import axios from "axios";
 import { BASE_URL } from "constant";
+import { retrieveJWT, setJWT } from "helpers";
 
 export const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -8,7 +9,7 @@ export const axiosInstance = axios.create({
 axiosInstance.interceptors.request.use(
   (config) => {
     if (!config.headers["Authorization"]) {
-      const jwt = localStorage.getItem("jwt");
+      const jwt = retrieveJWT();
       config.headers["Authorization"] = jwt;
     }
     return config;
@@ -22,8 +23,8 @@ axiosInstance.interceptors.response.use(
   (response) => {
     const jwt = response?.data?.payload?.jwt?.jwtToken;
     if (jwt) {
-      localStorage.setItem("jwt", jwt);
       axiosInstance.defaults.headers["Authorization"] = jwt;
+      setJWT(jwt);
     }
     return response;
   },
