@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import { Login, NotFound, SignUp } from 'pages'
-import { PrivateRoutes } from 'routes/PrivateRoutes'
+import { PrivateRoutes } from './PrivateRoutes'
 
 export const AllRoutes = () => {
   return (

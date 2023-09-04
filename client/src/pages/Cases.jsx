@@ -1,3 +1,7 @@
 export const Cases = () => {
-  return <div>Cases</div>
+  return (
+    <div>
+      <h1>Cases</h1>
+    </div>
+  )
 }

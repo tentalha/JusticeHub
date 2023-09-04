@@ -19,5 +19,10 @@ export const register_user = async (data) => {
 };
 
 export const me = async () => {
-  return axiosInstance.get("/me");
+  try {
+    const response = axiosInstance.get("/me");
+    return response;
+  } catch (error) {
+    return Promise.reject(error);
+  }
 };
