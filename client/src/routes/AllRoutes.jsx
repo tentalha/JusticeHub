@@ -16,7 +16,7 @@ export const AllRoutes = () => {
       {/* Private Routes */}
       <Route element={<Protected />}>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/hello" element={<h1>hi</h1>} />
+        
       </Route>
     </Routes>
   )
