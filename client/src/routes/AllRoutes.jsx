@@ -1,23 +1,18 @@
 import { Route, Routes } from 'react-router-dom'
-import { Login, SignUp, Dashboard } from 'pages'
-import { Protected } from 'components'
-import { useCheckUserAuthState } from 'hooks'
+import { Login, NotFound, SignUp } from 'pages'
+import { PrivateRoutes } from './PrivateRoutes'
 
 export const AllRoutes = () => {
-  //For checking user auth state
-  useCheckUserAuthState()
-
   return (
     <Routes>
-      <Route>
-        <Route path="/register" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-      </Route>
+      {/* Public Routes */}
+      <Route path="/register" element={<SignUp />} />
+      <Route path="/login" element={<Login />} />
+
       {/* Private Routes */}
-      <Route element={<Protected />}>
-        <Route path="/" element={<Dashboard />} />
-        
-      </Route>
+      <Route path="/*" element={<PrivateRoutes />} />
+      {/* Not Found Route */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

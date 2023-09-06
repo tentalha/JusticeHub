@@ -1,2 +1,5 @@
 export * from "./HOC";
-export * from "./Sidebar"
+export * from "./Loader";
+export * from "./Icon";
+export * from "./Sidebar";
+export * from "./Navbar"

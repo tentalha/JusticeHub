@@ -6,9 +6,9 @@ export const signInUser = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     try {
       const response = await login_user(data);
-      return response.data;
+      return response?.data;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      return rejectWithValue(error?.response?.data);
     }
   }
 );

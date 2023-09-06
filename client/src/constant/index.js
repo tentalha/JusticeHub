@@ -8,5 +8,4 @@ export const MUST_BE_A_NUMBER = "Must be a number";
 
 export const INVALID_EMAIL = "Invalid email address";
 
-export const MISSING_REQUIRED_FIELD = 'Missing required field';
-
+export const MISSING_REQUIRED_FIELD = "Required Information";

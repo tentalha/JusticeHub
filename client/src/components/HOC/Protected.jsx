@@ -1,7 +1,8 @@
 import { Navigate, Outlet } from 'react-router-dom'
+import { retrieveJWT } from 'helpers'
 
 export const Protected = () => {
-  const jwt = localStorage.getItem('jwt')
+  const jwt = retrieveJWT()
   if (!jwt) {
     return <Navigate to="/login" />
   }

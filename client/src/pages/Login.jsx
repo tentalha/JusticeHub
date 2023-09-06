@@ -51,9 +51,9 @@ export const Login = () => {
               className="w-full mt-2 px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
               placeholder="Enter your email"
             />
-            {errors.email && (
+            {errors?.email && (
               <span className="text-red-500 text-sm">
-                {errors.email.message}
+                {errors.email?.message}
               </span>
             )}
           </div>
@@ -67,9 +67,9 @@ export const Login = () => {
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring focus:border-blue-500"
               placeholder="Enter your password"
             />
-            {errors.password && (
+            {errors?.password && (
               <span className="text-red-500 text-sm">
-                {errors.password.message}
+                {errors.password?.message}
               </span>
             )}
           </div>
