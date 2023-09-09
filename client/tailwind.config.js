@@ -6,8 +6,12 @@ export default {
   ],
   theme: {
     extend: {
+
+      fontFamily:{
+        custom: ['"Poppins"', 'Poppins'],
+      },
       colors:{
-        'custom-blue': '#12326D',
+        'custom-blue': 'rgba(18, 50, 109, 1)',
       }
     },
   },
