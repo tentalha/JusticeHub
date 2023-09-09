@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { me } from "services";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser } from "features/slices/userSlice";
-import { retrieveJWT } from "helpers";
+import { retrieveJWT, signOut } from "helpers";
 
 export const useCheckUserAuthState = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ export const useCheckUserAuthState = () => {
       }
     } catch (error) {
       if (error?.response?.status == 401) {
-        navigate("/login");
+        signOut();
       }
     }
   };
