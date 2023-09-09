@@ -8,7 +8,6 @@ export const MainLayout = () => {
         <div className="mt-6 ml-4">
           <Outlet />
         </div>
-    
     </main>
   )
 }
