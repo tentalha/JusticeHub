@@ -5,17 +5,17 @@ import meRoutes from "./me.routes";
 import authRoutes from "./auth.routes";
 import operatorRoutes from "./operator.routes";
 import investigatorRoutes from "./investigator.routes";
-import { meController } from "../controllers";
+import criminalRoutes from "./criminal.routes";
 // --------------------------------------------------------->>
 export const router = Router();
 
 router.use("/me", isLoggedIn, meRoutes);
 router.use("/auth", isNotLoggedIn, authRoutes);
 router.use("/operators", isLoggedIn, hasRights(["admin"]), operatorRoutes);
+router.use("/criminals", isLoggedIn, hasRights(["admin"]), criminalRoutes);
 router.use(
   "/investigators",
   isLoggedIn,
   hasRights(["admin"]),
   investigatorRoutes
 );
-// router.use('/firs', firRoutes)
