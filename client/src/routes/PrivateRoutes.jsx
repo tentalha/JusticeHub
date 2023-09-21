@@ -14,7 +14,9 @@ export const PrivateRoutes = () => {
         <Routes>
           <Route element={<MainLayout />}>
             <Route element={<Protected />}>
-              <Route path="/" element={<Dashboard />} />
+              {user.role === 'citizen' ? (
+                <Route path="/" element={<Citizen />} />
+              ) : null}
               {user.role === 'admin' ? (
                 <Route path="/manageInvestigators" element={<ManageInvestigators />} />
               ) : null}
