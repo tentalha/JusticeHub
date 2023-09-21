@@ -154,7 +154,7 @@ export const SignUp = () => {
           <div className="flex justify-center mt-4 ">
             <Link
               to="/login"
-              className=" text-cyan-700 mr-4 text-blue-500 hover:underline"
+              className=" text-cyan-700 mr-4 hover:underline"
             >
               Already have an account? Login
             </Link>
