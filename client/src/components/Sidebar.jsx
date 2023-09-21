@@ -58,6 +58,8 @@ export const Sidebar = () => {
                 </span>
               </Link>
             </li>
+
+            {role === 'citizen' ? (
             <li>
               <Link
                 to="/cases"
@@ -69,7 +71,11 @@ export const Sidebar = () => {
               </Link>
 
             </li>
+            ): null
 
+          }
+
+            {role === 'citizen' ? (
             <li>
               <Link
                 to="/inbox"
@@ -82,7 +88,8 @@ export const Sidebar = () => {
                 </span>
               </Link>
             </li>
-
+            ): null
+        }
             {role === 'admin' ? (
                   <li>
                   <Link

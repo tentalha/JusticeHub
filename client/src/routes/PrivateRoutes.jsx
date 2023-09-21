@@ -15,7 +15,7 @@ export const PrivateRoutes = () => {
           <Route element={<MainLayout />}>
             <Route element={<Protected />}>
               {user.role === 'citizen' ? (
-                <Route path="/" element={<Citizen />} />
+              <Route path="/cases" element={<Cases />} />
               ) : null}
               {user.role === 'admin' ? (
                 <Route path="/manageInvestigators" element={<ManageInvestigators />} />
@@ -23,8 +23,11 @@ export const PrivateRoutes = () => {
               {user.role === 'admin' ? (
                 <Route path="/manageOperators" element={<ManageOperators />} />
               ) : null}
-              <Route path="/cases" element={<Cases />} />
-              <Route path='/inbox' element={<Inbox />} />
+              {user.role === 'citizen' ? (
+              <Route path="/inbox" element={<Inbox />} />
+              ) : null}
+              
+              <Route path='/' element={<Dashboard />} />
               
 
 
