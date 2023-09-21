@@ -1,4 +1,4 @@
-import { Cases, Citizen, Investigators, Operators } from 'pages'
+import { Cases, Dashboard, Investigators, ManageInvestigators, ManageOperators, Operators, Inbox } from 'pages'
 import { useSelector } from 'react-redux'
 import { useCheckUserAuthState } from 'hooks'
 import { Loader, MainLayout, Protected } from 'components'
@@ -18,12 +18,16 @@ export const PrivateRoutes = () => {
                 <Route path="/" element={<Citizen />} />
               ) : null}
               {user.role === 'admin' ? (
-                <Route path="/investigators" element={<Investigators />} />
+                <Route path="/manageInvestigators" element={<ManageInvestigators />} />
               ) : null}
               {user.role === 'admin' ? (
-                <Route path="/operators" element={<Operators />} />
+                <Route path="/manageOperators" element={<ManageOperators />} />
               ) : null}
               <Route path="/cases" element={<Cases />} />
+              <Route path='/inbox' element={<Inbox />} />
+              
+
+
             </Route>
           </Route>
         </Routes>

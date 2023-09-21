@@ -5,3 +5,6 @@ export * from "./Cases";
 export * from "./Investigators";
 export * from "./Operators";
 export * from "./NotFound";
+export * from "./ManageOperators";
+export * from "./ManageInvestigators";
+export * from "./Inbox";
