@@ -80,6 +80,7 @@ export const getInvestigatorId = async (req, res, next) => {
 export const deleteInvestigatorId = async (req, res, next) => {
   try {
     let id = req.params.id;
+    const investigatorToDelete = await getInvestigatorId(id)
     const investigator = await deleteInvestigator(id);
     if (!investigator) {
       return R4XX(
@@ -89,7 +90,7 @@ export const deleteInvestigatorId = async (req, res, next) => {
         `Investigator with id /${id}/ not found`
       );
     }
-    R2XX(res, 200, "SUCCESS", "Investigator Deleted");
+    R2XX(res, 200, "SUCCESS", "Investigator Deleted", {investigator:sanitizeUser(investigatorToDelete)});
   } catch (error) {
     next(error);
   }

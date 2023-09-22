@@ -1,4 +1,4 @@
-import { Cases, Dashboard, Investigators, ManageInvestigators, ManageOperators, Operators, Inbox } from 'pages'
+import { Cases, Dashboard, Investigators, ManageInvestigators, ManageOperators, Operators, Inbox, ManageCriminals  } from 'pages'
 import { useSelector } from 'react-redux'
 import { useCheckUserAuthState } from 'hooks'
 import { Loader, MainLayout, Protected } from 'components'
@@ -22,6 +22,9 @@ export const PrivateRoutes = () => {
               ) : null}
               {user.role === 'admin' ? (
                 <Route path="/manageOperators" element={<ManageOperators />} />
+              ) : null}
+              {user.role === 'admin' ? (
+                <Route path="/manageCriminals" element={<ManageCriminals />} />
               ) : null}
               {user.role === 'citizen' ? (
               <Route path="/inbox" element={<Inbox />} />
