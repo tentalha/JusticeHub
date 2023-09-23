@@ -80,7 +80,7 @@ export const getInvestigatorId = async (req, res, next) => {
 export const deleteInvestigatorId = async (req, res, next) => {
   try {
     let id = req.params.id;
-    const investigatorToDelete = await getInvestigatorId(id)
+    const investigatorToDelete = await fetchInvestigatorId(id)
     const investigator = await deleteInvestigator(id);
     if (!investigator) {
       return R4XX(

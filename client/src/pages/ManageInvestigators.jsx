@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getAllOperators } from "features";
+import { deleteInvestigator, getAllOperators } from "features";
 import { getAllInvestigators } from "features";
 import { Loader } from "components";
 import { Modal } from "components";
@@ -179,7 +179,7 @@ export const ManageInvestigators = () => {
                             </a>
                             <button
                               className="ml-4 font-medium text-red-600 dark:text-red-400 hover:text-red-800 hover:underline"
-                              o //nClick={() => dispatch(deleteOperator(operator._id))}
+                              onClick={() => dispatch(deleteInvestigator(investigator._id))}
                             >
                               Delete
                             </button>

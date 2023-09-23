@@ -39,9 +39,9 @@ export const Dashboard = () => {
           </div>
         </div>
       </div>
-      <hr className=" h-2 mt-4 bg-custom-blue"></hr>
+      <hr className=" h-2 mt-4 bg-custom-blue w-full"></hr>
       <br />
-      <h1 id="tagline" className=" bg-gray-100 hover:text-white hover:bg-black p-3 py-6 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-md md:text-lg lg:text-xl font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
+      <h1 id="tagline" className=" bg-gray-100 hover:text-white hover:bg-black p-3 py-6 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-md md:text-lg lg:text-xl font-bold font-custom text-justify transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
         Hey {user?.name}, you can monitor your FIRs and interact with your
         investigator to get updates related to you respective FIR
       </h1>

@@ -39,7 +39,7 @@ export const Sidebar = () => {
           isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
         } transition-transform sm:translate-x-0 w-52 sm:w-56 h-auto sm:overflow-y-auto bg-custom-blue fixed sm:relative z-50`}
       >
-        <div className="h-full px-3 py-4 overflow-y-auto">
+        <div className="h-screen px-3 py-4 overflow-y-auto">
           {/* Close Mobile Menu Button */}
           <div
             className="absolute top-0 right-0 w-12 h-12 p-2 cursor-pointer sm:hidden"
@@ -131,6 +131,20 @@ export const Sidebar = () => {
                   
                 ) : null
             }
+
+            {role === 'admin' ? (
+                  <li>
+                  <Link
+                    to="/createFIR"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/searcher.png/" />
+                    <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowr text-sm font-semibold">Create FIR</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+            }
             
             {role === 'operator' ? (
               <li>
@@ -164,24 +178,6 @@ export const Sidebar = () => {
               </div>
             </li>
           </ul>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <br></br>
-          <h1 className=' font-custom text-center text-2xl text-white font-bold mt-2 '> {user?.name}</h1>
         </div>
       </aside>
     </div>

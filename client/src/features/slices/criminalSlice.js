@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllCriminals } from "features/thunk";
+import { deleteCriminal, getAllCriminals } from "features/thunk";
 
 
 const initialState = {
@@ -15,8 +15,7 @@ const criminalSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(
-        getAllCriminals.fulfilled,
-        (state, { payload: { payload } }) => {
+        getAllCriminals.fulfilled,(state, { payload: { payload } }) => {
           state.criminals = payload.criminals;
           state.loading = false;
         }
@@ -27,6 +26,20 @@ const criminalSlice = createSlice({
       })
       .addCase(getAllCriminals.rejected, (state, { payload: error }) => {
         state.loading = false;
+      })
+      .addCase(deleteCriminal.fulfilled,(state, { payload: { payload } }) => {
+        let id = (payload.payload.criminal._id)
+        state.loading = false;
+        state.criminals = state.criminals.filter((elem) => elem._id !== id);
+        }
+      )
+      .addCase(deleteCriminal.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(deleteCriminal.rejected, (state, { payload: error }) => {
+        state.loading = false;
+        state.error = error.message; // Assuming error.message contains a readable error message
       })
       
   },
