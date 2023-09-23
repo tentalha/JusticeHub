@@ -66,13 +66,13 @@ export const getOperatorId = async (req, res, next) => {
 export const deleteOperatorId = async (req, res, next) => {
   try {
     let id = req.params.id;
+    const operatorToDelete = await fetchOperatorId(id)
     const operator = await deleteOperator(id);
     if (!operator) {
       return R4XX(res, 404, "NOT-FOUND", `Operator with id /${id}/ not found`);
     }
-    R2XX(res, 200, "SUCCESS", "Operator Deleted");
+    R2XX(res, 200, "SUCCESS", "Operator Deleted",{operator: sanitizeUser(operatorToDelete)});
   } catch (error) {
-    console.log(error)
     next(error);
   }
 };

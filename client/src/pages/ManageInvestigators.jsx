@@ -6,6 +6,7 @@ import { getAllOperators } from "features";
 import { getAllInvestigators } from "features";
 import { Loader } from "components";
 import { Modal } from "components";
+import { Icon } from "components";
 
 export const ManageInvestigators = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,22 +24,29 @@ export const ManageInvestigators = () => {
   }, []);
 
   return (
-    <div className="xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-48">
-      <div className={`${isModalOpen ? "blur-sm" : ""}`}>
+    <div className=" xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
+        {" "}
+        {/* Adjust the margin to match your sidebar width */}
+        <div className={`${isModalOpen ? "blur-sm" : ""}`}>
+
         <div
           className={`mt-0 flex flex-col sm:flex-row justify-between items-center `}
         >
-          <h1 className="xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 ">
-            Admin Dashboard
+          <h1  className=" xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 ">
+            Citizen Dashobard
           </h1>
-
+  
           <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
-            <p className="font-custom-blue font-semibold  ">
+            <p className=" font-custom-blue font-semibold font-custom  ">
               FAQ | Contact Us | Help Center
             </p>
-            <h1 className="max-w-sm ml-20 mr-20 text-xl top-0 font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500  mx-auto ">
+  
+            <h1 className=" max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500  mx-auto ">
               {user?.name}
             </h1>
+            <div className="mt-1">
+              <Icon src="/icons/account.png" />
+            </div>
           </div>
         </div>
         <hr className="h-2 mt-4 bg-custom-blue"></hr>

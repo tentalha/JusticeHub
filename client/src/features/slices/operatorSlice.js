@@ -46,9 +46,9 @@ const operatorSlice = createSlice({
 
   })
  .addCase(deleteOperator.fulfilled, (state, { payload }) => {
+   let id = (payload.payload.operator._id)
     state.loading = false;
-    const { _id } = payload; // Assuming your payload contains an ID
-    state.operators = state.operators.filter((elem) => elem._id !== _id);
+    state.operators = state.operators.filter((elem) => elem._id !== id);
   })
   .addCase(deleteOperator.pending, (state) => {
     state.error = null;

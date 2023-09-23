@@ -8,3 +8,5 @@ export * from "./NotFound";
 export * from "./ManageOperators";
 export * from "./ManageInvestigators";
 export * from "./Inbox";
+export * from "./Dashboard";
+export * from "./ManageCriminals"

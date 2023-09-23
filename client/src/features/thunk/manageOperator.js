@@ -29,12 +29,13 @@ export const createNewOperator = createAsyncThunk(
 
 export const deleteOperator = createAsyncThunk(
   'deleteOperator',
-  async (_id) => {
+  async (id) => {
     try {
-      const response = await delete_Operator(_id);
-      return response?.data;
+      const response = await delete_Operator(id);
+      return response?.data
     } catch (error) {
       throw error; // Let Redux Toolkit handle the error by rejecting the promise
     }
+    
   }
 );
