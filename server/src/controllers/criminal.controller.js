@@ -7,6 +7,7 @@ import {
   deleteCriminal as deleteCriminalS,
 } from "../services";
 import { USER_ALREADY_EXIST } from "../constants";
+import cloudinary from "../configs/cloudinaryConfig";
 
 export const createCriminal = async (req, res, next) => {
   try {
@@ -24,20 +25,18 @@ export const createCriminal = async (req, res, next) => {
         `Criminal with CNIC ${req.body.CNIC} already exists`
       );
     }
-
+    const upload = await cloudinary.upload(req.file.path);
     let payload = {
       name: req.body.name,
       age: req.body.age,
       CNIC: req.body.CNIC,
-      image: SERVER_URI + req.file.filename,
+      image: upload?.secure_url,
     };
     await createCriminalS(payload);
     R2XX(res, 201, "SUCCESS", "Criminal created successfully", {
       criminal: payload,
     });
   } catch (error) {
-    console.log(error);
-
     next(error);
   }
 };
@@ -62,7 +61,7 @@ export const deleteCriminalId = async (req, res, next) => {
     }
     R2XX(res, 200, "SUCCESS", "Criminal Deleted");
   } catch (error) {
-    console.log(error)
+    console.log(error);
     next(error);
   }
 };
