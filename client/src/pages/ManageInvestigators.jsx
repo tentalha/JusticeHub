@@ -33,7 +33,7 @@ export const ManageInvestigators = () => {
           className={`mt-0 flex flex-col sm:flex-row justify-between items-center `}
         >
           <h1  className=" xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 ">
-            Citizen Dashobard
+            Admin Dashobard
           </h1>
   
           <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">

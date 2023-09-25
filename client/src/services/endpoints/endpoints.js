@@ -109,3 +109,4 @@ export const delete_Criminal = async (id) => {
     return Promise.reject(error);
   }
 };
+

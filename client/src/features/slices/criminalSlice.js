@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { deleteCriminal, getAllCriminals } from "features/thunk";
+import { IdentifyErrorForCriminal } from "errors";
+import { createNewCriminal, deleteCriminal, getAllCriminals } from "features/thunk";
 
 
 const initialState = {
@@ -27,12 +28,23 @@ const criminalSlice = createSlice({
       .addCase(getAllCriminals.rejected, (state, { payload: error }) => {
         state.loading = false;
       })
+      .addCase(createNewCriminal.fulfilled, (state, { payload: { payload } }) => {
+        state.criminals.push(payload);
+        state.loading = false;
+      })
+      .addCase(createNewCriminal.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(createNewCriminal.rejected, (state, { payload: error }) => {
+        state.loading = false;
+        state.error = IdentifyErrorForCriminal(error);
+      })
       .addCase(deleteCriminal.fulfilled,(state, { payload: { payload } }) => {
         let id = (payload.payload.criminal._id)
         state.loading = false;
         state.criminals = state.criminals.filter((elem) => elem._id !== id);
-        }
-      )
+        })
       .addCase(deleteCriminal.pending, (state) => {
         state.error = null;
         state.loading = true;

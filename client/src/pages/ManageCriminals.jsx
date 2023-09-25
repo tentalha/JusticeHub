@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { Icon } from "components";
+import { CriminalModal, Icon } from "components";
 import { useEffect, useState } from "react";
 import { getAllCriminals, deleteCriminal } from "features";
 import { Modal } from "components";
@@ -10,13 +10,10 @@ export const ManageCriminals = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [userType, setUserType] = useState("");
-
 
   const criminalState = useSelector((state) => state.criminal);
   const criminals = criminalState.criminals;
 
-  console.log(criminals);
    useEffect(() => {
      dispatch(getAllCriminals());
   }, []);
@@ -26,7 +23,7 @@ export const ManageCriminals = () => {
   <div className={`${isModalOpen ? "blur-sm" : ""}`}>
     <div className="mt-0 flex flex-col sm:flex-row justify-between items-center">
       <h1 className="xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500">
-        Citizen Dashboard
+        Admin Dashboard
       </h1>
       <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
         <p className="font-custom-blue font-semibold font-custom">
@@ -112,7 +109,6 @@ export const ManageCriminals = () => {
         <button
           onClick={() => {
             setIsModalOpen(true);
-            setUserType("Criminal");
           }}
           className="bg-custom-blue hover:bg-blue-600 ml-20 text-white text-xl font-bold py-3 px-20 sm:py-3 sm:px-6 rounded-full transition duration-300 ease-in-out"
           type="button"
@@ -153,7 +149,7 @@ export const ManageCriminals = () => {
                   <span className="ml-4 text-gray-600 text-sm">{criminal.age}</span>
                 </div>
                 <div className="flex mt-2">
-                  <button  className="w-full p-1 text-white bg-red-400 rounded-2xl shadow-lg font-bold font-custom">Delete</button>
+                  <button onClick={()=>dispatch(deleteCriminal(criminal._id))}  className="w-full p-1 text-white bg-red-400 rounded-2xl shadow-lg font-bold font-custom">Delete</button>
                   <button className="w-full p-1 text-white bg-blue-400 rounded-2xl shadow-lg ml-5 font-bold font-custom">Edit</button>
                 </div>
               </div>
@@ -163,12 +159,10 @@ export const ManageCriminals = () => {
       </div>
     )}
   </div>
-  <Modal
-    userType={userType}
+  <CriminalModal
     isOpen={isModalOpen}
-    onClose={() => setIsModalOpen(false)}
+    onClose={()=> setIsModalOpen(false)}
   />
 </div>
-
   );
 };
