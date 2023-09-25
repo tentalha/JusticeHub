@@ -2,10 +2,11 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import { router } from "./routes";
-import { R5XX } from "./API";
+import { R4XX, R5XX } from "./API";
 import path from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { MulterError } from "multer";
 import "./configs/dbConfig";
 // --------------------------------------------------->>
 const app = express();
@@ -26,7 +27,13 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/backend/api/", router);
 
 app.use((error, req, res, next) => {
-  R5XX(res, 500, "INTERNAL-SERVER-ERROR", undefined, { error });
+  R5XX(
+    res,
+    500,
+    "INTERNAL-SERVER-ERROR",
+    "Some unexpected error occurred on server-side.",
+    { error: error?.message }
+  );
 });
 // --------------------------------------------------->>
 export default app;

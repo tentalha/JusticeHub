@@ -16,8 +16,20 @@ const firSchema = new Schema(
       enum: firStatuses,
       default: "pending",
     },
-    victimId: {
+    applicationType: {
+      type: String,
       required: true,
+    },
+    complainantName: {
+      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+    complainantCNIC: {
+      required: true,
+      type: String,
+    },
+    complainantId: {
       type: Schema.Types.ObjectId,
       ref: "User",
     },
@@ -30,6 +42,15 @@ const firSchema = new Schema(
       required: true,
       type: Schema.Types.ObjectId,
       ref: "User",
+    },
+    suspects: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Criminal",
+      },
+    ],
+    relevantDocs: {
+      type: String,
     },
   },
   {
