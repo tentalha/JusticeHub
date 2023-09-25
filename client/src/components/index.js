@@ -4,3 +4,4 @@ export * from "./Icon";
 export * from "./Sidebar";
 export * from "./Footer";
 export * from "./Modal";
+export * from "./CriminalModal";
