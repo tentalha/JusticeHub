@@ -45,9 +45,9 @@ const investigatorSlice = createSlice({
 
   })
   .addCase(deleteInvestigator.fulfilled, (state, { payload }) => {
-     let id = (payload.payload.investigator._id)
-     state.loading = false;
-     state.investigators = state.investigators.filter((elem) => elem._id !== id);
+    let id = (payload.payload.investigator._id)
+    state.loading = false;
+    state.investigators = state.investigators.filter((elem) => elem._id !== id);
    })
    .addCase(deleteInvestigator.pending, (state) => {
      state.error = null;

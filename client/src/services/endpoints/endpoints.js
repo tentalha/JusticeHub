@@ -91,3 +91,22 @@ export const get_All_Criminals = async () => {
     return Promise.reject(error);
   }
 };
+
+export const create_New_Criminal = async (data) => {
+  try {
+    const response = await axiosInstance.post("/criminals", data);
+    return response;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const delete_Criminal = async (id) => {
+  try {
+    const response = await axiosInstance.delete(`/criminals/${id}`);
+    return response;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
