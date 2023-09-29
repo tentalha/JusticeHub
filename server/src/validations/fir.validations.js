@@ -51,8 +51,8 @@ export const firCreationValidationRules = () => {
     body("datetime")
       .notEmpty()
       .withMessage("Date and Time is required")
-      .isString()
-      .matches(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/)
+      .isISO8601()
+      // .matches(/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/)
       .withMessage("Invalid Date Time"),
     body("details")
       .notEmpty()
@@ -60,16 +60,6 @@ export const firCreationValidationRules = () => {
       .isString()
       .isLength({ min: 50 })
       .withMessage("Details must be at-least 50 characters"),
-    // body("suspects")
-    //   .isArray()
-    //   .withMessage("Suspects must be an array")
-    //   .custom((value) => {
-    //     for (const suspect of value) {
-    //       if (suspect && typeof suspect !== "string") {
-    //         throw new Error("Each suspect must be a string");
-    //       }
-    //     }
-    //     return true;
-    //   }),
+    body("suspects").isString(),
   ];
 };

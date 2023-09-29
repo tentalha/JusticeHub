@@ -54,12 +54,6 @@ const firSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
     },
-    // suspects: [
-    //   {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "Criminal",
-    //   },
-    // ],
     suspects: [
       {
         type: String,

@@ -7,6 +7,7 @@ import {
   getUserByCNIC,
 } from "../services";
 import cloudinary from "../configs/cloudinaryConfig";
+import { sanitizeFir } from "../utils";
 
 export const createFir = async (req, res, next) => {
   try {
@@ -41,8 +42,12 @@ export const createFir = async (req, res, next) => {
       operatorId: req?.user,
       caseNo: req.body.caseNo,
     };
+
     let fir = await createNewFIR(payload);
-    R2XX(res, 201, "SUCCESS", "FIR created successfully", { fir });
+
+    R2XX(res, 201, "SUCCESS", "FIR created successfully", {
+      fir: sanitizeFir(fir),
+    });
   } catch (error) {
     next(error);
   }
