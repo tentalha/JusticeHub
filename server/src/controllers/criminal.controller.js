@@ -1,5 +1,4 @@
 import { R2XX, R4XX } from "../API";
-import { SERVER_URI } from "../configs";
 import {
   createCriminal as createCriminalS,
   getCriminalByCNIC,

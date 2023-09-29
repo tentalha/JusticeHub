@@ -1,4 +1,15 @@
-import { Cases, Investigators, ManageInvestigators, ManageOperators, Citizen, Operators, Inbox, ManageCriminals, CreateFIR, Admin, AllFIRs  } from 'pages'
+import {
+  Cases,
+  Investigators,
+  ManageInvestigators,
+  ManageOperators,
+  Citizen,
+  Operators,
+  Inbox,
+  ManageCriminals,
+  CreateFIR,
+  Admin,
+} from 'pages'
 import { useSelector } from 'react-redux'
 import { useCheckUserAuthState } from 'hooks'
 import { Loader, MainLayout, Protected } from 'components'
@@ -16,10 +27,13 @@ export const PrivateRoutes = () => {
           <Route element={<MainLayout />}>
             <Route element={<Protected />}>
               {user.role === 'citizen' ? (
-              <Route path="/cases" element={<Cases />} />
+                <Route path="/cases" element={<Cases />} />
               ) : null}
               {user.role === 'admin' ? (
-                <Route path="/manageInvestigators" element={<ManageInvestigators />} />
+                <Route
+                  path="/manageInvestigators"
+                  element={<ManageInvestigators />}
+                />
               ) : null}
               {user.role === 'admin' ? (
                 <Route path="/manageOperators" element={<ManageOperators />} />
@@ -31,24 +45,14 @@ export const PrivateRoutes = () => {
                 <Route path="/manageCriminals" element={<ManageCriminals />} />
               ) : null}
               {user.role === 'admin' ? (
-              <Route path="/" element={<Admin />} />
-              ) : null}
-              {user.role === 'admin' ? (
-              <Route path="/allFIRs" element={<AllFIRs />} />
-              ) : null}
-              {user.role === 'admin' ? (
-              <Route path="/firDetail" element={<FirDetail />} />
+                <Route path="/" element={<Admin />} />
               ) : null}
               {user.role === 'citizen' ? (
-              <Route path="/inbox" element={<Inbox />} />
+                <Route path="/inbox" element={<Inbox />} />
               ) : null}
               {user.role === 'citizen' ? (
-              <Route path="/" element={<Citizen />} />
+                <Route path="/" element={<Citizen />} />
               ) : null}
-              
-              
-
-
             </Route>
           </Route>
         </Routes>
