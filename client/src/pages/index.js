@@ -10,3 +10,5 @@ export * from "./ManageInvestigators";
 export * from "./Inbox";
 export * from "./ManageCriminals"
 export * from "./CreateFIR";
+export * from "./AllFIRs";
+export * from "./FirDetail";

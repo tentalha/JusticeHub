@@ -1,8 +1,9 @@
-import { Cases, Investigators, ManageInvestigators, ManageOperators, Citizen, Operators, Inbox, ManageCriminals, CreateFIR, Admin  } from 'pages'
+import { Cases, Investigators, ManageInvestigators, ManageOperators, Citizen, Operators, Inbox, ManageCriminals, CreateFIR, Admin, AllFIRs  } from 'pages'
 import { useSelector } from 'react-redux'
 import { useCheckUserAuthState } from 'hooks'
 import { Loader, MainLayout, Protected } from 'components'
 import { Route, Routes } from 'react-router-dom'
+import { FirDetail } from 'pages/FirDetail'
 
 export const PrivateRoutes = () => {
   const { user } = useSelector((state) => state.user)
@@ -31,6 +32,12 @@ export const PrivateRoutes = () => {
               ) : null}
               {user.role === 'admin' ? (
               <Route path="/" element={<Admin />} />
+              ) : null}
+              {user.role === 'admin' ? (
+              <Route path="/allFIRs" element={<AllFIRs />} />
+              ) : null}
+              {user.role === 'admin' ? (
+              <Route path="/firDetail" element={<FirDetail />} />
               ) : null}
               {user.role === 'citizen' ? (
               <Route path="/inbox" element={<Inbox />} />

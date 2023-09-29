@@ -29,13 +29,11 @@ export const CreateFIR = () => {
         </div>
       </div>
       <hr className="h-2 mt-4 bg-custom-blue"></hr>
-      <br />
-      <h1 className=" bg-gray-100 hover:text-white hover:bg-black p-3 py-6 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-md md:text-lg lg:text-xl font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
+      <h1 className=" bg-gray-100 hover:text-white mt-2 mb-2 hover:bg-black p-3 py-6 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-sm md:text-sm lg:text-sm font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
         Hey Operator, You can Create New FIR in this Module. Dont Forget to
         check the criminal status of the complainant. Make sure you enter
         correct information about the incident.
       </h1>
-      <br />
       <div class="container mx-auto px-4 lg:px-20 mb-20">
         <div class="w-full p-8 my-4 md:px-12 lg:w-full lg:pl-4 lg:pr-0 mr-auto rounded-2xl shadow-xl shadow-custom-blue">
           <div class="flex">
@@ -45,13 +43,13 @@ export const CreateFIR = () => {
           </div>
           <div class="grid grid-cols-1 gap-5 gap-x-28 md:grid-cols-2 mt-5 pr-5">
             <div>
-              <label htmlFor="email" className="text-black font-semibold">
+              <label htmlFor="name" className="text-black font-semibold">
                 Complainant's Name
               </label>
               <input
                 class="w-full lg:w-full bg-white mr-5 border-gray-300 border-2 font-semibold placeholder:text-black text-gray-900 mt-2 p-2 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text"
-                placeholder="First Name*"
+                placeholder=" Name*"
               />
             </div>
 
@@ -150,7 +148,7 @@ export const CreateFIR = () => {
               >
                 Relevant Documents
               </label>
-              <label class="relative mt-5 font-bold font-custom inline-flex ml-5 items-center px-20 py-3 bg-custom-blue text-white rounded-3xl border border-gray-300 cursor-pointer hover:bg-gray-100">
+              <label class="relative mt-5 font-bold font-custom inline-flex ml-5 items-center px-20 py-3 bg-custom-blue text-white rounded-3xl border border-gray-300 cursor-pointer hover:bg-blue-400">
                 <span class="mr-2">Choose File</span>
                 <input
                   type="file"

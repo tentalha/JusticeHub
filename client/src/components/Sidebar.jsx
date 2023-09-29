@@ -117,6 +117,20 @@ export const Sidebar = () => {
                   
                 ) : null
                 }
+            
+            {role === 'admin' ? (
+                  <li>
+                  <Link
+                    to="/allFIRs"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/cases.png/" />
+                    <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">All FIRs</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+                }
 
             {role === 'admin' ? (
                   <li>
@@ -170,7 +184,7 @@ export const Sidebar = () => {
             ) : null}
             <li>
               <div
-                className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                className="flex items-center p-2 cursor-pointer text-red-500 hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
                 onClick={signOut}
               >
                 <Icon src="/icons/exit.svg" />

@@ -47,7 +47,7 @@ export const Admin = () => {
     series: [
       {
         name: "Completed FIRs",
-        data: [6, 4, 9, 10, 7, 6, 7, 9, 11, 4, 3, 8],
+        data: [6, 4, 9, 10, 7, 6, 7, 9, 11, 0, 0, 0],
       },
     ],
   });
