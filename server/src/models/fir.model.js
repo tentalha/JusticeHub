@@ -3,12 +3,21 @@ import { model, Schema } from "mongoose";
 
 const firSchema = new Schema(
   {
+    caseNo: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     details: {
       type: String,
       required: true,
     },
     location: {
       type: String,
+      required: true,
+    },
+    datetime: {
+      type: Date,
       required: true,
     },
     status: {
@@ -22,10 +31,13 @@ const firSchema = new Schema(
     },
     complainantName: {
       required: true,
-      type: Schema.Types.ObjectId,
-      ref: "User",
+      type: String,
     },
     complainantCNIC: {
+      required: true,
+      type: String,
+    },
+    complainantPhone: {
       required: true,
       type: String,
     },
@@ -36,7 +48,6 @@ const firSchema = new Schema(
     investigatorId: {
       type: Schema.Types.ObjectId,
       ref: "User",
-      default: null,
     },
     operatorId: {
       required: true,
@@ -45,8 +56,7 @@ const firSchema = new Schema(
     },
     suspects: [
       {
-        type: Schema.Types.ObjectId,
-        ref: "Criminal",
+        type: String,
       },
     ],
     relevantDocs: {

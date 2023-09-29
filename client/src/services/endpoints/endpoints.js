@@ -1,3 +1,4 @@
+import { formatDate } from "helpers";
 import { axiosInstance } from "services";
 
 export const login_user = async (data) => {
@@ -81,8 +82,6 @@ export const delete_Investigator = async (id) => {
   }
 };
 
-
-
 export const get_All_Criminals = async () => {
   try {
     const response = await axiosInstance.get("/criminals");
@@ -110,3 +109,22 @@ export const delete_Criminal = async (id) => {
   }
 };
 
+export const create_fir = async (data) => {
+  try {
+    const formData = new FormData();
+    data = {
+      ...data,
+      relevantDocs: data.relevantDocs[0],
+      datetime: formatDate(data?.datetime),
+    };
+    
+    for (const key in data) {
+      formData.append(key, data[key]);
+    }
+
+    const response = await axiosInstance.post("/firs", formData);
+    return response;
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

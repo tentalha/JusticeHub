@@ -152,10 +152,7 @@ export const SignUp = () => {
             </div>
           </form>
           <div className="flex justify-center mt-4 ">
-            <Link
-              to="/login"
-              className=" text-cyan-700 mr-4 hover:underline"
-            >
+            <Link to="/login" className=" text-cyan-700 mr-4 hover:underline">
               Already have an account? Login
             </Link>
           </div>

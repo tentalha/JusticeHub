@@ -6,7 +6,6 @@ export const MainLayout = () => {
     <main className="flex">
        <Sidebar /> 
         <div className="mt-6 ml-4">
-          
           <Outlet />
           <Footer />
         </div>
