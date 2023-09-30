@@ -1,12 +1,6 @@
 export const userTypes = ["citizen", "operator", "investigator", "admin"];
 
-export const firStatuses = [
-  "pending",
-  "active",
-  "assigned",
-  "completed",
-  "closed",
-];
+export const firStatuses = ["pending", "active", "completed", "closed"];
 
 export const registerRequiredFields = ["name", "email", "password", "role"];
 

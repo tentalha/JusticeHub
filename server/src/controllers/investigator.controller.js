@@ -8,13 +8,13 @@ import {
   deleteInvestigator,
 } from "../services";
 import { R2XX, R4XX } from "../API";
-import { sanitizeUser } from "../utils";
+import { sanitizeUser, sanitizeUsers } from "../utils";
 
 export const getAllInvestigators = async (req, res, next) => {
   try {
     const investigators = await fetchAllInvestigators();
     R2XX(res, 200, "SUCCESS", "Investigators list in payload", {
-      investigators,
+      investigators: sanitizeUsers(investigators),
     });
   } catch (error) {
     console.log(error);
