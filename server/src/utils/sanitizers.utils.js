@@ -6,8 +6,14 @@ export const sanitizeUser = (user) => {
     name: user?.name,
     email: user?.email,
     role: user?.role,
-    createdAt: new Date(user?.createdAt).toLocaleDateString(), //Converting date-time to readable format.
+    availability: user?.availability,
+    CNIC: user?.CNIC,
+    createdAt: new Date(user?.createdAt)?.toLocaleDateString(), //Converting date-time to readable format.
   };
+};
+
+export const sanitizeUsers = (users) => {
+  return users.map((user) => sanitizeUser(user));
 };
 
 export const sanitizeFir = (fir) => {
@@ -22,6 +28,11 @@ export const sanitizeFir = (fir) => {
     complainantName: fir?.complainantName,
     complainantCNIC: fir?.complainantCNIC,
     complainantPhone: fir?.complainantPhone,
+    investigatorId: fir?.investigatorId,
     relevantDocs: fir?.relevantDocs,
   };
+};
+
+export const sanitizeFirs = (firs) => {
+  return firs.map((fir) => sanitizeFir(fir));
 };

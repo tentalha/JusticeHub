@@ -4,7 +4,8 @@ import {
   CNIC_INVALID,
   LETTER_SPACES,
 } from "../constants";
-import { body } from "express-validator";
+import { body, param } from "express-validator";
+import mongoose from "mongoose";
 
 export const firCreationValidationRules = () => {
   return [
@@ -61,5 +62,20 @@ export const firCreationValidationRules = () => {
       .isLength({ min: 50 })
       .withMessage("Details must be at-least 50 characters"),
     body("suspects").isString(),
+  ];
+};
+
+export const approveFIRValidation = () => {
+  return [
+    param("caseId")
+      .notEmpty()
+      .withMessage("Case caseId is required in query params")
+      .custom((value) => mongoose.Types.ObjectId.isValid(value))
+      .withMessage("Invalid caseId mentioned in query"),
+    body("investigatorId")
+      .notEmpty()
+      .withMessage("Investigator Id is required")
+      .custom((value) => mongoose.Types.ObjectId.isValid(value))
+      .withMessage("Invalid Investigator Id"),
   ];
 };
