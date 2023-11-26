@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IdentifyErrorForInvestigator } from "errors";
-import { getAllInvestigators } from "features/thunk";
+import { getAllInvestigators, updateInvestigator } from "features/thunk";
 import { createNewInvestigator } from "features/thunk";
 import { deleteInvestigator } from "features/thunk";
 
@@ -56,7 +56,21 @@ const investigatorSlice = createSlice({
    .addCase(deleteInvestigator.rejected, (state, { error }) => {
      state.loading = false;
      state.error = error.message; // Assuming error.message contains a readable error message
-   });
+   })
+   .addCase(updateInvestigator.pending, (state) => {
+    state.loading = true;
+  })
+  .addCase(updateInvestigator.fulfilled, (state, action) => {
+    state.loading = false;
+    console.log(action.payload);
+    state.investigators = state.investigators.map((elem)=>
+      elem._id === action.payload._id ? action.payload : elem        
+    )
+  })
+  .addCase(updateInvestigator.rejected, (state, action) => {
+    state.loading = false;
+    state.error = action.error.message;
+  });
 
 }
  

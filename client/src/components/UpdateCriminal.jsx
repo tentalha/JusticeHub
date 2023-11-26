@@ -3,38 +3,69 @@ import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewCriminal, createNewOperator } from "features";
+import {  getAllCriminals, updateCriminal } from "features";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { operatorSchema } from "schema";
-import { createNewInvestigator } from "features";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { criminalSchema } from "schema/criminalSchema";
 import { useNavigate } from "react-router-dom";
 
-export const CriminalModal = ({isOpen, onClose,}) =>{
+export const UpdateCriminal = ({isOpen, onClose, criminalId}) =>{
+    const [updatedData, setUpdatedData] = useState({});
     const {error} = useSelector((state)=>state.criminal);
+    const criminalState = useSelector((state)=> state.criminal);
+    const criminals = criminalState.criminals;
     const navigate = useNavigate();
-
     const dispatch = useDispatch();
+
+    
+    useEffect(() => {
+      const singleCriminal = criminals.find((elem) => elem._id === criminalId);
+      
+      if (singleCriminal) {
+        setUpdatedData(singleCriminal);
+      }
+
+    }, []); // Include dependencies
+  
+    // const preLoadedValues = {
+    //   name: updatedData?.name || '',
+    //   CNIC: updatedData?.CNIC || '',
+    //   age: updatedData?.age || '',
+    //   image: updatedData?.image|| null,
+    // }
 
     const {
         register,
         handleSubmit,
-        reset,
+        reset, 
         formState: { errors },
       } = useForm({
+        defaultValues: {
+          name: updatedData?.name,
+          age: updatedData?.age,
+          CNIC: updatedData?.CNIC,
+        },
+        mode: 'onBlur',
         resolver: yupResolver(criminalSchema),
       })
-    
+      
+      useEffect(()=>{
+        reset({...updatedData});
+      },[updatedData])
 
+    const id = criminalId;
     const handleFormSubmit = (data) =>{
-        dispatch(createNewCriminal(data)).then (()=>{
+      console.log(data);
+        dispatch(updateCriminal({id, data})).then (()=>{
         reset();
-        toast.success("Registered Successfully!");
+        toast.success("Updated Successfully!");
         onClose();
         navigate("/manageCriminals");
+        dispatch(getAllCriminals());
         })
     }
+
     return(
         <div
       id="authentication-modal"
@@ -63,7 +94,7 @@ export const CriminalModal = ({isOpen, onClose,}) =>{
                         <input
                         className="w-full lg:w-full bg-white mr-5 border-gray-300 border-2  text-gray-900 mt-2 p-2 rounded-lg focus:outline-none focus:shadow-outline"
                         type="text"
-                        placeholder="Full Name*"
+                        placeholder="Full Name*" 
                         {...register('name')}
                         />                        
                          {errors.name && (
@@ -75,7 +106,7 @@ export const CriminalModal = ({isOpen, onClose,}) =>{
                     
                     <div>
                         <label for="CNIC" class="block mb-2 text-sm font-medium text-gray-900">Enter CNIC</label>
-                        <InputMask
+                        <input
                         className="w-full lg:w-full bg-white mr-5 border-gray-300 border-2  text-gray-900 mt-2 p-2 rounded-lg focus:outline-none focus:shadow-outline"
                         type="text"
                         mask="99999-9999999-9"
@@ -112,13 +143,12 @@ export const CriminalModal = ({isOpen, onClose,}) =>{
                   <input
                     type="file"
                     id="image"
-                    name="image"
                     className="absolute top-0 left-0 w-full h-full opacity-0 cursor-pointer bg-custom-blue rounded-3xl"
                     {...register('image')}
                   />
                 </label>
               </div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register</button>
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
                     
                 </form>
             </div>

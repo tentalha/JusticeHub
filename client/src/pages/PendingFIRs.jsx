@@ -3,9 +3,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "components";
 import { Loader } from "components";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllFIRS } from "features";
+import { getPendingFIRS } from "features";
+import { getActiveFIRS } from "features";
 
-export const AllFIRs = () => {
+export const PendingFIRs = () => {
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -18,11 +19,10 @@ export const AllFIRs = () => {
   const navigate = useNavigate();
 
   const firState = useSelector((state) => state.fir);
-  const firs = firState.firs;
-  console.log(firs);
+  const firs = firState.pendingFir;
 
   useEffect(()=>{
-    dispatch(getAllFIRS());
+    dispatch(getPendingFIRS());
   }, [])
 
   return (
@@ -47,17 +47,17 @@ export const AllFIRs = () => {
       </div>
       <hr className="h-2 mt-4 -ml-5 bg-custom-blue"></hr>
       <br />
-      <h1 id="tagline" className="  mt-2 bg-gray-100 hover:text-white hover:bg-black py-1 rounded-2xl  sm:ml-0 sm:mr-0 text-sm px-2 sm:text-sm md:text-sm lg:text-sm font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
-  Hey Admin, Below are the ALL FIRs, click on a link to see a detailed view. All FIRs contains all type of FIRs, like Pending, Active, Completed, Closed. You can filter them from the below given filter, explore them.
+      <h1 id="tagline" className=" mt-2 bg-gray-100 hover:text-white px-2 hover:bg-black py-1 rounded-2xl  sm:ml-0 sm:mr-0 text-sm sm:text-sm md:text-sm lg:text-sm font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
+  Hey Admin, Below are the Pending FIRs, click on a link to see a detailed view. Pending FIRs are those to whom the investigator has not been assigned yet. Assign the investigator to make them an active FIR.
 </h1>
 
         <h1
           id="tagline"
-          className="p-5 mt-2 text-center  sm:ml-0 text-xl sm:text-2xl lg:text-4xl font-bold font-custom bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500"
+          className="p-5 mt-2 text-center  sm:ml-0 text-xl sm:text-2xl lg:text-4xl font-bold font-custom bg-clip-text text-transparent bg-red-500"
         >
-          All FIRs ({firs.length})
+          Pending FIR ({firs.length})
         </h1>
-      {firs&& firs.length > 0 ? (
+    
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-2 md:mx-5 lg:mx-10 xl:mx-20 mb-20">
   <div className="flex flex-col sm:flex-row items-center justify-between pb-4">
     <div className="mb-4 sm:mb-0">
@@ -182,7 +182,7 @@ export const AllFIRs = () => {
             </tr>
         </thead>
         <tbody>
-  {firs &&  firs.map((fir) => (
+  {firs && firs.map((fir) => (
     <tr class="bg-white border-b" key={fir._id}>
       <th scope="row" class="px-6 py-8 font-medium text-gray-900 whitespace-nowrap">
         {fir.caseNo}
@@ -203,7 +203,7 @@ export const AllFIRs = () => {
         {fir.complainantPhone}                
       </td>
       <td class="px-6 py-8">
-        <Link  to={`/firDetail/${fir._id}`} class="font-medium text-blue-600 hover:underline">Click For Details</Link>
+        <Link  to={`/pendingFirDetail/${fir._id}`} class="font-medium text-blue-600 hover:underline">Click For Details</Link>
       </td>
     </tr>
   ))}
@@ -214,9 +214,6 @@ export const AllFIRs = () => {
     </div>
     )}
 </div>
-):(
-  <div><h1 className="text-center text-2xl font-custom font-semibold ">Currently There Are No FIRs To Show.</h1></div>
-) }
 </div>
   );
 };

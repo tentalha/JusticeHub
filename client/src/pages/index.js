@@ -12,3 +12,16 @@ export * from "./ManageCriminals"
 export * from "./CreateFIR";
 export * from "./AllFIRs";
 export * from "./FirDetail";
+export * from "./PendingFIRs";
+export * from "./ActiveFIRs";
+export * from "./CompletedFIRs";
+export * from "./ClosedFIRs";
+export * from "./PendingFirDetail";
+export * from "./AssignedFIRs";
+export * from "./InvesCompletedFIRs";
+export * from "./InvesClosedFIRs";
+export * from "./CitizenFIRs";
+export * from "./OperatorFIRs";
+export * from "./EmailVerification";
+export * from "./ResetPassword";
+export * from "./CheckCriminalStatus";

@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Icon } from "components";
 import { Loader } from "components";
 import { Link, useNavigate } from "react-router-dom";
-import { getAllFIRS } from "features";
+import { getClosedFIRS } from "features";
 
-export const AllFIRs = () => {
+export const ClosedFIRs = () => {
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
 
@@ -18,11 +18,10 @@ export const AllFIRs = () => {
   const navigate = useNavigate();
 
   const firState = useSelector((state) => state.fir);
-  const firs = firState.firs;
-  console.log(firs);
+  const firs = firState.closedFir;
 
   useEffect(()=>{
-    dispatch(getAllFIRS());
+    dispatch(getClosedFIRS());
   }, [])
 
   return (
@@ -47,15 +46,15 @@ export const AllFIRs = () => {
       </div>
       <hr className="h-2 mt-4 -ml-5 bg-custom-blue"></hr>
       <br />
-      <h1 id="tagline" className="  mt-2 bg-gray-100 hover:text-white hover:bg-black py-1 rounded-2xl  sm:ml-0 sm:mr-0 text-sm px-2 sm:text-sm md:text-sm lg:text-sm font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
-  Hey Admin, Below are the ALL FIRs, click on a link to see a detailed view. All FIRs contains all type of FIRs, like Pending, Active, Completed, Closed. You can filter them from the below given filter, explore them.
+      <h1 id="tagline" className=" mt-2 bg-gray-100 hover:text-white hover:bg-black py-1 px-2 rounded-2xl  sm:ml-0 sm:mr-0 text-sm sm:text-sm md:text-sm lg:text-sm font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
+  Hey Admin, Below are the Closed FIRs, click on a link to see a detailed view. Closed FIRs are those to whom the investigator was assigned but due to very weak evidences and no such progress from the complainant, that case has been closed.
 </h1>
 
         <h1
           id="tagline"
-          className="p-5 mt-2 text-center  sm:ml-0 text-xl sm:text-2xl lg:text-4xl font-bold font-custom bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500"
+          className="p-5 mt-2 text-center  sm:ml-0 text-xl sm:text-2xl lg:text-4xl font-bold font-custom bg-clip-text text-transparent bg-gray-500"
         >
-          All FIRs ({firs.length})
+          Closed FIRs ({firs.length})
         </h1>
       {firs&& firs.length > 0 ? (
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg mx-2 md:mx-5 lg:mx-10 xl:mx-20 mb-20">

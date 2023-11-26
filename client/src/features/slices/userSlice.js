@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IdentifyErrorForAuth } from "errors";
-import { signInUser, signUpUser } from "features";
+import { forgetPassword, resetPassword, signInUser, signUpUser } from "features";
 
 const initialState = {
   user: {},
   error: null,
   loading: false,
+  link: "",
+  isSuccess:false
 };
 
 const userSlice = createSlice({
@@ -39,6 +41,30 @@ const userSlice = createSlice({
         state.loading = true;
       })
       .addCase(signUpUser.rejected, (state, { payload: error }) => {
+        state.loading = false;
+        state.error = IdentifyErrorForAuth(error);
+      })
+      .addCase(forgetPassword.fulfilled, (state, { payload: { payload } }) => {
+        state.link = payload.link;
+        state.loading = false;
+      })
+      .addCase(forgetPassword.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(forgetPassword.rejected, (state, { payload: error }) => {
+        state.loading = false;
+        state.error = IdentifyErrorForAuth(error);
+      })
+      .addCase(resetPassword.fulfilled, (state, { payload: { payload } }) => {
+        state.loading = false;
+        state.isSuccess = true
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.error = null;
+        state.loading = true;
+      })
+      .addCase(resetPassword.rejected, (state, { payload: error }) => {
         state.loading = false;
         state.error = IdentifyErrorForAuth(error);
       });

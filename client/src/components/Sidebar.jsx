@@ -90,6 +90,90 @@ export const Sidebar = () => {
             </li>
             ): null
         }
+
+        {role === 'citizen' ? (
+            <li>
+              <Link
+                to="/citizenFIRs"
+                className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+              >
+                <Icon src="/icons/inbox.png" />
+                <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">My FIRs</span>
+               
+              </Link>
+            </li>
+            ): null
+        }
+            {role === 'admin' ? (
+                  <li>
+                  <Link
+                    to="/allFIRs"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/cases.png/" />
+                    <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">All FIRs</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+                }
+
+              {role === 'admin' ? (
+                  <li>
+                  <Link
+                    to="/pendingFIRs"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/pending.png/" />
+                    <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Pending FIRs</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+                }
+
+              {role === 'admin' ? (
+                  <li>
+                  <Link
+                    to="/activeFIRs"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/active.jpg/" />
+                    <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Active FIRs</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+                }
+
+            {role === 'admin' ? (
+                  <li>
+                  <Link
+                    to="/completedFIRs"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/completed.png/" />
+                    <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Completed FIRs</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+                }
+
+            {role === 'admin' ? (
+                  <li>
+                  <Link
+                    to="/closedFIRs"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/blocked.png/" />
+                    <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Closed FIRs</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+                }
+
             {role === 'admin' ? (
                   <li>
                   <Link
@@ -117,20 +201,6 @@ export const Sidebar = () => {
                   
                 ) : null
                 }
-            
-            {role === 'admin' ? (
-                  <li>
-                  <Link
-                    to="/allFIRs"
-                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
-                    >
-                    <Icon src="/icons/cases.png/" />
-                    <span className=" font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">All FIRs</span>
-                  </Link>
-                </li>
-                  
-                ) : null
-                }
 
             {role === 'admin' ? (
                   <li>
@@ -144,41 +214,79 @@ export const Sidebar = () => {
                 </li>
                   
                 ) : null
-            }
+}
+            
+            {role === 'operator' ? (
+              <li>
+                <Link
+                  to="/checkCriminalStatus"
+                  className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                  >
+                  <Icon src="/icons/criminal.png/" />
+                  <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowrap  text-sm font-semibold">Check Criminal</span>
+                </Link>
+              </li>
+            ) : null}
 
-            {role === 'admin' ? (
+             
+        {role === 'operator' ? (
                   <li>
                   <Link
                     to="/createFIR"
                     className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
                     >
-                    <Icon src="/icons/searcher.png/" />
+                    <Icon src="/icons/create.png/" />
                     <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowr text-sm font-semibold">Create FIR</span>
                   </Link>
                 </li>
                   
                 ) : null
             }
-            
-            {role === 'operator' ? (
+
+          {role === 'operator' ? (
+                  <li>
+                  <Link
+                    to="/operatorFIRs"
+                    className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                    >
+                    <Icon src="/icons/cases.png/" />
+                    <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowr text-sm font-semibold">My FIRs</span>
+                  </Link>
+                </li>
+                  
+                ) : null
+            }
+
+            {role === 'investigator' ? (
               <li>
                 <Link
-                  to="/operators"
+                  to="/assignedFIRs"
                   className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
                   >
-                  <Icon src="/icons/operator.png/" />
-                  <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowrap  text-sm font-semibold">Operators</span>
+                  <Icon src="/icons/create.png/" />
+                  <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Assigned Cases</span>
                 </Link>
               </li>
             ) : null}
             {role === 'investigator' ? (
               <li>
                 <Link
-                  to="/investigators"
+                  to="/invesCompletedFIRs"
                   className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
                   >
-                  <Icon src="/icons/searcher.png/" />
-                  <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Investigators</span>
+                  <Icon src="/icons/completed.png/" />
+                  <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Completed Cases</span>
+                </Link>
+              </li>
+            ) : null}
+            {role === 'investigator' ? (
+              <li>
+                <Link
+                  to="/invesClosedFIRs"
+                  className="flex items-center p-2 cursor-pointer  text-white hover:text-black rounded-lg hover:bg-gray-100 group transform scale-100 hover:scale-105 transition-transform duration-300 ease-in-out"
+                  >
+                  <Icon src="/icons/cross.png/" />
+                  <span className="font-custom mt-2 flex-1 ml-3 whitespace-nowrap text-sm font-semibold">Closed Cases</span>
                 </Link>
               </li>
             ) : null}

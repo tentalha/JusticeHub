@@ -68,11 +68,11 @@ export const CreateFIR = () => {
           </div>
         </div>
       </div>
-      <hr className="h-2 mt-4 bg-custom-blue"></hr>
-      <h1 className=" bg-gray-100 hover:text-white mt-2 mb-2 hover:bg-black p-3 py-6 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-sm md:text-sm lg:text-sm font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
+      <hr className="-ml-5 h-2 mt-4 bg-custom-blue"></hr>
+      <h1 className=" bg-gray-100 hover:text-white mt-2 mb-2 px-2 hover:bg-black p-3 py-6 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-sm md:text-sm lg:text-sm font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
         Hey Operator, You can Create New FIR in this Module. Dont Forget to
         check the criminal status of the complainant. Make sure you enter
-        correct information about the incident.
+        correct information about the incident. Good Luck!
       </h1>
       <br />
       <div className="container mx-auto px-4 lg:px-20 mb-20">

@@ -4,12 +4,15 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { deleteInvestigator, getAllOperators } from "features";
 import { getAllInvestigators } from "features";
-import { Loader } from "components";
+import { Loader, UpdateInvestigator } from "components";
 import { Modal } from "components";
 import { Icon } from "components";
 
 export const ManageInvestigators = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [investigatorId, setInvestigatorId] = useState("");
+
   const { user } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -27,7 +30,7 @@ export const ManageInvestigators = () => {
     <div className=" xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
         {" "}
         {/* Adjust the margin to match your sidebar width */}
-        <div className={`${isModalOpen ? "blur-sm" : ""}`}>
+        <div className={`${isCreateModalOpen || isUpdateModalOpen ? "blur-sm" : ""}`}>
 
         <div
           className={`mt-0 flex flex-col sm:flex-row justify-between items-center `}
@@ -49,7 +52,7 @@ export const ManageInvestigators = () => {
             </div>
           </div>
         </div>
-        <hr className="h-2 mt-4 bg-custom-blue"></hr>
+        <hr className="h-2 -ml-5 mt-4 bg-custom-blue"></hr>
         <br />
         <h1 className="bg-gray-100 p-5 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-md md:text-lg lg:text-xl font-bold font-custom text-center">
           Hey Admin, you can Create, Delete, Update, and View Investigators in
@@ -172,8 +175,8 @@ export const ManageInvestigators = () => {
                           </td>
                           <td className="p-2 whitespace-nowrap">
                             <a
-                              href="#"
                               className="font-medium text-indigo-600 hover:text-indigo-800 hover:underline"
+                              onClick={()=>{setIsUpdateModalOpen(true); setInvestigatorId(investigator._id)}}
                             >
                               Edit
                             </a>
@@ -194,7 +197,7 @@ export const ManageInvestigators = () => {
               <div className="flex justify-end mb-4 mr-2">
                 <button
                   onClick={() => {
-                    setIsModalOpen(true);
+                    setIsCreateModalOpen(true);
                     setUserType("investigator");
                   }}
                   className="bg-custom-blue hover:bg-blue-600 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full transition duration-300 ease-in-out"
@@ -207,12 +210,21 @@ export const ManageInvestigators = () => {
           </div>
         )}
       </div>
-
+      {isCreateModalOpen?(
       <Modal
         userType={userType}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
       />
+      ): null}
+
+      {isUpdateModalOpen?(
+      <UpdateInvestigator
+        isOpen={isUpdateModalOpen}
+        onClose={() => setIsUpdateModalOpen(false)}
+        investigatorId= {investigatorId}
+      />
+      ): null}
     </div>
   );
 };
