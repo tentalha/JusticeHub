@@ -1,8 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {
+  check_criminal_status,
   create_New_Criminal,
   delete_Criminal,
   get_All_Criminals,
+  update_Criminal,
 } from "services";
 
 export const getAllCriminals = createAsyncThunk(
@@ -37,6 +39,30 @@ export const deleteCriminal = createAsyncThunk(
       return response?.data;
     } catch (error) {
       return rejectWithValue(error);
+    }
+  }
+);
+
+export const updateCriminal = createAsyncThunk(
+  "updateCriminal",
+  async ({id, data}, { rejectWithValue }) => {
+    try {
+      const response = await update_Criminal(id,data);
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
+export const checkCriminalStatus = createAsyncThunk(
+  "checkCriminalStatus",
+  async (CNIC, { rejectWithValue }) => {
+    try {
+      const response = await check_criminal_status(CNIC);
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
     }
   }
 );

@@ -3,71 +3,71 @@ import InputMask from "react-input-mask";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { createNewOperator } from "features";
+import {  getAllCriminals, getAllInvestigators, getAllOperators, updateCriminal, updateInvestigator, updateOperator } from "features";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { operatorSchema } from "schema";
-import { createNewInvestigator } from "features";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { criminalSchema } from "schema/criminalSchema";
+import { useNavigate } from "react-router-dom";
 
-export const Modal = ({ isOpen, onClose, userType }) => {
-  const dispatch = useDispatch();
+export const UpdateInvestigator = ({isOpen, onClose, investigatorId}) =>{
+    const [updatedData, setUpdatedData] = useState({});
+    const {error} = useSelector((state)=>state.investigator);
+    const investigatorState = useSelector((state)=> state.investigator);
+    const investigators = investigatorState.investigators;
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
-  const { user } = useSelector((state) => state.user);
+    
+    useEffect(() => {
+      const singleInvestigator = investigators.find((elem) => elem._id === investigatorId);
+      
+      if (singleInvestigator) {
+        setUpdatedData(singleInvestigator);
+      }
 
-  const operatorState = useSelector((state) => state.operator);
+    }, []); // Include dependencies
+  
+    // const preLoadedValues = {
+    //   name: updatedData?.name || '',
+    //   CNIC: updatedData?.CNIC || '',
+    //   age: updatedData?.age || '',
+    //   image: updatedData?.image|| null,
+    // }
 
-  const {
-    register,
-    handleSubmit,
-    reset,
-    formState: { errors, isSubmitting },
-  } = useForm({
-    resolver: yupResolver(operatorSchema),
-  });
+    const {
+        register,
+        handleSubmit,
+        reset, 
+        formState: { errors },
+      } = useForm({
+        defaultValues: {
+          name: updatedData?.name,
+          email: updatedData?.email,
+          CNIC: updatedData?.CNIC,
+        },
+        mode: 'onBlur',
+        resolver: yupResolver(operatorSchema),
+      })
+      
+      useEffect(()=>{
+        reset({...updatedData});
+      },[updatedData])
 
-  const handleFormSubmit = (data) => {
-    // Call the appropriate onSubmit function based on userType
-    switch (userType) {
-      case "investigator":
-        handleFormSubmitInvestigator(data);
-        break;
-      case "operator":
-        handleFormSubmitOperator(data);
-        break;
-      default:
-        // Handle an unknown userType or show an error
-        console.error("Unknown userType:", userType);
-        break;
+    const id = investigatorId;
+    const handleFormSubmit = (data) =>{
+      console.log(data);
+        dispatch(updateInvestigator({id, data})).then (()=>{
+        reset();
+        toast.success("Updated Successfully!");
+        onClose();
+        navigate("/manageInvestigators");
+        dispatch(getAllInvestigators());
+        })
     }
-  };
-  const handleFormSubmitOperator = (data) => {
-    const { ...rest } = data;
 
-    dispatch(createNewOperator(rest)).then(() => {
-      reset();
-      toast.success("Registered Successfully!");
-      onClose(); // Close the modal after successful submission
-    });
-  };
-
-  useEffect(() => {
-    if (operatorState.error) {
-      toast.error(operatorState.error);
-    }
-  }, [operatorState.error]);
-
-  const handleFormSubmitInvestigator = (data) => {
-    const { ...rest } = data;
-
-    dispatch(createNewInvestigator(rest)).then(() => {
-      reset();
-      toast.success("Registered Successfully!");
-      onClose(); // Close the modal after successful submission
-    });
-  };
-
-  return (
-<div
+    return(
+        <div
       id="authentication-modal"
       tabIndex="-1"
       aria-hidden="true"
@@ -86,7 +86,7 @@ export const Modal = ({ isOpen, onClose, userType }) => {
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900">Add New {userType}</h3>
+                <h3 class="mb-4 text-xl font-medium text-gray-900">Update Operator</h3>
                 <form class="space-y-6" onSubmit={handleSubmit(handleFormSubmit)}>
                     
                     <div>
@@ -121,7 +121,7 @@ export const Modal = ({ isOpen, onClose, userType }) => {
                     </div>
                     <div>
                         <label for="CNIC" class="block mb-2 text-sm font-medium text-gray-900">Enter CNIC</label>
-                        <InputMask
+                        <input
                         {...register("CNIC", { required: true })}
                         mask="99999-9999999-9"
                         class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Enter CNIC (00000-0000000-0)"
@@ -132,40 +132,13 @@ export const Modal = ({ isOpen, onClose, userType }) => {
                           </p>
                         )}
                     </div>
-                    <div>
-  <label for="role" class="block mb-2 text-sm font-medium text-gray-900">
-    Enter Role
-  </label>
-  {userType === "investigator" ? (
-    <input
-      {...register("role", { required: true })}
-      type="text"
-      name="role"
-      id="role"
-      value="investigator" // Set the fixed value for investigator
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      readOnly // Make the input read-only to prevent user modifications
-    />
-  ) : (
-    <input
-      {...register("role", { required: true })}
-      type="text"
-      name="role"
-      id="role"
-      value="operator" // Set the fixed value for operator
-      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-      readOnly // Make the input read-only to prevent user modifications
-    />
-  )}
-</div>
-                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Register</button>
+                   
+                    <button type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Update</button>
                     
                 </form>
             </div>
         </div>
     </div>
 </div> 
-  );
-};
-
-
+    )
+}

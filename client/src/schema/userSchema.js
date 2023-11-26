@@ -32,3 +32,19 @@ export const registerSchema = yup.object().shape({
     .required(MISSING_REQUIRED_FIELD)
     .test("valid-cnic", "Invalid CNIC format", isValidCNIC),
 });
+
+export const emailVerificationSchema = yup
+  .object({
+    email: yup.string().required(MISSING_REQUIRED_FIELD).email(INVALID_EMAIL),
+  })
+  .required();
+
+
+  export const resetPasswordSchema = yup
+  .object({
+    password: yup
+    .string()
+    .required(MISSING_REQUIRED_FIELD)
+    .min(8, PASSWORD_MIN_LENGTH),
+    })
+  .required();

@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IdentifyErrorForOperator } from "errors";
-import { getAllOperators } from "features/thunk/manageOperator";
+import { getAllOperators, updateOperator } from "features/thunk/manageOperator";
 import { createNewOperator } from "features/thunk/manageOperator";
 import { deleteOperator } from "features/thunk/manageOperator";
 
@@ -57,7 +57,22 @@ const operatorSlice = createSlice({
   .addCase(deleteOperator.rejected, (state, { error }) => {
     state.loading = false;
     state.error = error.message; // Assuming error.message contains a readable error message
+  })
+  .addCase(updateOperator.pending, (state) => {
+    state.loading = true;
+  })
+  .addCase(updateOperator.fulfilled, (state, action) => {
+    state.loading = false;
+    console.log(action.payload);
+    state.operators = state.operators.map((elem)=>
+      elem._id === action.payload._id ? action.payload : elem        
+    )
+  })
+  .addCase(updateOperator.rejected, (state, action) => {
+    state.loading = false;
+    state.error = action.error.message;
   });
+  
 }
 });
 

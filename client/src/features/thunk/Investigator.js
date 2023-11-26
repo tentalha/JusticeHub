@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { get_All_Investigators } from "services";
+import { get_All_Investigators, update_Investigator } from "services";
 import { create_New_Investigator } from "services";
 import { delete_Investigator } from "services";
 
@@ -35,6 +35,18 @@ export const deleteInvestigator = createAsyncThunk(
       return response?.data;
     } catch (error) {
       throw error; // Let Redux Toolkit handle the error by rejecting the promise
+    }
+  }
+);
+
+export const updateInvestigator = createAsyncThunk(
+  "updateInvestigator",
+  async ({id, data} , { rejectWithValue }) => {
+    try {
+      const response = await update_Investigator(id,data);
+      return response?.data;
+    } catch (error) {
+      return rejectWithValue(error?.response?.data);
     }
   }
 );

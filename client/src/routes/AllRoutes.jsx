@@ -1,5 +1,5 @@
 import { Route, Routes } from 'react-router-dom'
-import { Login, NotFound, SignUp } from 'pages'
+import { EmailVerification, Login, NotFound, ResetPassword, SignUp } from 'pages'
 import { PrivateRoutes } from './PrivateRoutes'
 
 
@@ -9,6 +9,9 @@ export const AllRoutes = () => {
       {/* Public Routes */}
       <Route path="/register" element={<SignUp />} />
       <Route path="/login" element={<Login />} />
+      <Route path="/emailVerification" element={<EmailVerification />} />
+      <Route path="/reset-Password" element={<ResetPassword />} />
+
 
       {/* Private Routes */}
       <Route path="/*" element={<PrivateRoutes />} />

@@ -1,15 +1,18 @@
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { CriminalModal, Icon } from "components";
+import { CriminalModal, Icon, UpdateCriminal } from "components";
 import { useEffect, useState } from "react";
 import { getAllCriminals, deleteCriminal } from "features";
 import { Modal } from "components";
 import { Loader } from "components";
+import { useNavigate } from "react-router-dom";
 
 export const ManageCriminals = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [criminalId, setCriminalId] = useState("");
 
   const criminalState = useSelector((state) => state.criminal);
   const criminals = criminalState.criminals;
@@ -18,8 +21,9 @@ export const ManageCriminals = () => {
      dispatch(getAllCriminals());
   }, []);
 
+
   return (
-    <div className="xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
+    <div className="xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 mb-20 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
   <div className={`${isModalOpen ? "blur-sm" : ""}`}>
     <div className="mt-0 flex flex-col sm:flex-row justify-between items-center">
       <h1 className="xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500">
@@ -37,7 +41,7 @@ export const ManageCriminals = () => {
         </div>
       </div>
     </div>
-    <hr className="h-2 mt-4 bg-custom-blue"></hr>
+    <hr className="h-2 mt-4 -ml-5 bg-custom-blue"></hr>
     <br />
     <h1
       id="tagline"
@@ -117,19 +121,21 @@ export const ManageCriminals = () => {
         </button>
       </div>
     </div>
+    {criminals&& criminals.length > 0 ? (
+    <div>
     {criminalState.loading ? (
       <div className="flex justify-center items-center">
         <Loader />
       </div>
     ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-5 lg:grid-cols-4 gap-4">
         {criminals.map((criminal) => (
           <div
             key={criminal._id}
             className="mb-20 ml-2 transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out"
           >
             <img
-              src={criminal.image}
+              src={criminal.image.url}
               alt="random image"
               className="w-96 h-72 object-center rounded-lg shadow-md"
             />
@@ -149,8 +155,8 @@ export const ManageCriminals = () => {
                   <span className="ml-4 text-gray-600 text-sm">{criminal.age}</span>
                 </div>
                 <div className="flex mt-2">
-                  <button onClick={()=>dispatch(deleteCriminal(criminal._id))}  className="w-full p-1 text-white bg-red-400 rounded-2xl shadow-lg font-bold font-custom">Delete</button>
-                  <button className="w-full p-1 text-white bg-blue-400 rounded-2xl shadow-lg ml-5 font-bold font-custom">Edit</button>
+                  <button onClick={()=>dispatch(deleteCriminal(criminal._id)).then(()=>{navigate("/manageCriminals")})}  className="w-full p-1 text-white bg-red-400 rounded-2xl shadow-lg font-bold font-custom">Delete</button>
+                  <button onClick={()=>{ setIsModalOpen(true); setCriminalId(criminal._id)}} className="w-full p-1 text-white bg-blue-400 rounded-2xl shadow-lg ml-5 font-bold font-custom">Edit</button>
                 </div>
               </div>
             </div>
@@ -158,11 +164,24 @@ export const ManageCriminals = () => {
         ))}
       </div>
     )}
+    </div>
+    ):(
+      <div><h1 className="text-center text-2xl mb-10 mt-10 font-custom font-semibold ">Currently There Are No CRIMINALS To Show.</h1></div>
+      )}
   </div>
+ 
   <CriminalModal
     isOpen={isModalOpen}
     onClose={()=> setIsModalOpen(false)}
   />
+
+  {isModalOpen ?(
+  <UpdateCriminal 
+    isOpen={isModalOpen}
+    onClose={()=> setIsModalOpen(false)}
+    criminalId={criminalId}
+  />
+  ): null}
 </div>
   );
 };
