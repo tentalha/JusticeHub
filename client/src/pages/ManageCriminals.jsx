@@ -12,6 +12,7 @@ export const ManageCriminals = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [criminalId, setCriminalId] = useState("");
 
   const criminalState = useSelector((state) => state.criminal);
@@ -24,7 +25,7 @@ export const ManageCriminals = () => {
 
   return (
     <div className="xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 mb-20 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
-  <div className={`${isModalOpen ? "blur-sm" : ""}`}>
+  <div className={`${isModalOpen || isUpdateModalOpen ? "blur-sm" : ""}`}>
     <div className="mt-0 flex flex-col sm:flex-row justify-between items-center">
       <h1 className="xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500">
         Admin Dashboard
@@ -47,7 +48,7 @@ export const ManageCriminals = () => {
       id="tagline"
       className="bg-gray-100 hover:text-white hover:bg-black p-3 py-6 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-md md:text-lg lg:text-xl font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out"
     >
-      Hey {user?.name}, you can Check the Criminal Record of the Complainant. Make sure you enter the criminal status of the complainant while submitting the FIR.
+      Hey {user?.name}, you can Check the Criminals Record of the Complainant. Make sure you enter the criminal status of the complainant while submitting the FIR.
     </h1>
     <br />
     <div className="flex">
@@ -156,7 +157,7 @@ export const ManageCriminals = () => {
                 </div>
                 <div className="flex mt-2">
                   <button onClick={()=>dispatch(deleteCriminal(criminal._id)).then(()=>{navigate("/manageCriminals")})}  className="w-full p-1 text-white bg-red-400 rounded-2xl shadow-lg font-bold font-custom">Delete</button>
-                  <button onClick={()=>{ setIsModalOpen(true); setCriminalId(criminal._id)}} className="w-full p-1 text-white bg-blue-400 rounded-2xl shadow-lg ml-5 font-bold font-custom">Edit</button>
+                  <button onClick={()=>{ setIsUpdateModalOpen(true); setCriminalId(criminal._id)}} className="w-full p-1 text-white bg-blue-400 rounded-2xl shadow-lg ml-5 font-bold font-custom">Edit</button>
                 </div>
               </div>
             </div>
@@ -170,15 +171,17 @@ export const ManageCriminals = () => {
       )}
   </div>
  
+ {isModalOpen ?(
   <CriminalModal
     isOpen={isModalOpen}
     onClose={()=> setIsModalOpen(false)}
   />
+ ): null}
 
-  {isModalOpen ?(
+  {isUpdateModalOpen ?(
   <UpdateCriminal 
-    isOpen={isModalOpen}
-    onClose={()=> setIsModalOpen(false)}
+    isOpen={isUpdateModalOpen}
+    onClose={()=> setIsUpdateModalOpen(false)}
     criminalId={criminalId}
   />
   ): null}
