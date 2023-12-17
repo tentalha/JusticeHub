@@ -86,7 +86,7 @@ export const UpdateCriminal = ({isOpen, onClose, criminalId}) =>{
                 <span class="sr-only">Close modal</span>
             </button>
             <div class="px-6 py-6 lg:px-8">
-                <h3 class="mb-4 text-xl font-medium text-gray-900">Add New Criminal</h3>
+                <h3 class="mb-4 text-xl font-medium text-gray-900">Update Criminal</h3>
                 <form class="space-y-6" onSubmit={handleSubmit(handleFormSubmit)}>
                     
                     <div>
