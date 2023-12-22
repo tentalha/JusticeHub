@@ -11,7 +11,7 @@ import { useEffect } from "react";
 import { criminalSchema } from "schema/criminalSchema";
 import { useNavigate } from "react-router-dom";
 
-export const CriminalModal = ({isOpen, onClose}) =>{
+export const CriminalModal = ({isOpen, onClose,}) =>{
     const {error} = useSelector((state)=>state.criminal);
     const navigate = useNavigate();
 
