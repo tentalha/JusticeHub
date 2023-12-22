@@ -94,7 +94,7 @@ export const Login = () => {
               to="/emailVerification"
               className="mr-4 text-blue-500 hover:underline font-bold "
             >
-              Forget Password?
+            Forget Password?
             </Link>
           </div>
         </form>

@@ -1,4 +1,4 @@
-export const BASE_URL = "http://98.71.8.187/backend/api";
+export const BASE_URL = "http://localhost:3500/backend/api";
 
 export const PASSWORDS_MUST_MATCH = "Password and Confirm Password must match";
 
@@ -10,4 +10,4 @@ export const INVALID_EMAIL = "Invalid email address";
 
 export const MISSING_REQUIRED_FIELD = "Required Information";
 
-export * from "./data";
+export * from "./data"

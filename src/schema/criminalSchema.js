@@ -21,6 +21,9 @@ export const criminalSchema = yup.object().shape({
   age: yup
     .string()
     .required("age is required"),
+  image: yup
+      .mixed()
+      .required(MISSING_REQUIRED_FIELD),
 });
 
 export const checkCriminalStatusSchema = yup.object().shape({

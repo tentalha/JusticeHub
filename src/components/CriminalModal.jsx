@@ -32,7 +32,6 @@ export const CriminalModal = ({isOpen, onClose,}) =>{
         reset();
         toast.success("Registered Successfully!");
         onClose();
-        navigate("/manageCriminals");
         })
     }
     return(

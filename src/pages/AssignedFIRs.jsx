@@ -183,7 +183,7 @@ export const AssignedFIRs = () => {
                     Phone Number
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Upload Evidence
+                    Viiew Evidences
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Update Status
@@ -215,7 +215,7 @@ export const AssignedFIRs = () => {
         {fir.complainantPhone}                
       </td>
       <td class="px-6 py-8">
-      <Link  class="font-medium text-blue-600 hover:underline">Click Here</Link>             
+      <Link to={"/evidenceFolders"}  class="font-medium text-blue-600 hover:underline">Click Here</Link>             
       </td>
       <td class="px-6 py-8">
       <Link onClick={()=> {setIsModalOpen(true); setId(fir._id)}}  class="font-medium text-blue-600 hover:underline">Click Here</Link>             

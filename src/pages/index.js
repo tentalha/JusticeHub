@@ -25,3 +25,6 @@ export * from "./OperatorFIRs";
 export * from "./EmailVerification";
 export * from "./ResetPassword";
 export * from "./CheckCriminalStatus";
+export * from "./EvidenceFolders";
+export * from "./CreateEvidence";
+export * from "./Evidences";

@@ -23,6 +23,8 @@ import {
   Operator,
   OperatorFIRs,
   CheckCriminalStatus,
+  EvidenceFolders,
+  Evidences,
 } from 'pages'
 import { useSelector } from 'react-redux'
 import { useCheckUserAuthState } from 'hooks'
@@ -102,6 +104,12 @@ export const PrivateRoutes = () => {
               ) : null}
               {user.role === 'investigator' ? (
                 <Route path="/invesClosedFIRs" element={<InvesClosedFIRs />} />
+              ) : null}
+              {user.role === 'investigator' ? (
+                <Route path="/evidenceFolders" element={<EvidenceFolders />} />
+              ) : null}
+              {user.role === 'investigator' ? (
+                <Route path="/evidences" element={<Evidences />} />
               ) : null}
               {user.role === 'operator' ? (
                 <Route path="/" element={<Operator />} />
