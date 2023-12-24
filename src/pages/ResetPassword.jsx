@@ -1,31 +1,27 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
-import { resetPassword, signUpUser } from 'features'
-import InputMask from 'react-input-mask'
+import { resetPassword } from 'features'
 import { useForm } from 'react-hook-form'
-import { registerSchema, resetPasswordSchema } from 'schema'
+import { resetPasswordSchema } from 'schema'
 import { toast } from 'react-toastify'
-import { useParams, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 
 export const ResetPassword = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [searchParams] = useSearchParams();
-
+  const [searchParams] = useSearchParams()
 
   const {
     register,
     handleSubmit,
-    reset,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(resetPasswordSchema),
   })
 
-  const userState = useSelector((state) => state.user);
+  const userState = useSelector((state) => state.user)
 
   useEffect(() => {
     if (userState.error) {
@@ -33,18 +29,18 @@ export const ResetPassword = () => {
     }
   }, [userState.error])
 
-  useEffect(()=>{
-    if(userState.isSuccess){
+  useEffect(() => {
+    if (userState.isSuccess) {
       toast('Password changed successfully.')
       navigate('/login')
     }
-  },[userState.isSuccess])
+  }, [userState.isSuccess, navigate])
 
   const handleFormSubmit = (data) => {
     const password = data.password
-    const token = searchParams.get('token');
-    const id = searchParams.get('id');
-    dispatch(resetPassword({token, id, password}));
+    const token = searchParams.get('token')
+    const id = searchParams.get('id')
+    dispatch(resetPassword({ token, id, password }))
   }
 
   return (
@@ -55,7 +51,6 @@ export const ResetPassword = () => {
             Create New Password
           </h2>
           <form onSubmit={handleSubmit(handleFormSubmit)}>
-            
             <div className="mb-4">
               <label
                 htmlFor="password"
@@ -75,7 +70,7 @@ export const ResetPassword = () => {
                 </p>
               )}
             </div>
-            
+
             <div className="flex justify-center">
               <button
                 type="submit"
@@ -85,7 +80,6 @@ export const ResetPassword = () => {
               </button>
             </div>
           </form>
-          
         </div>
       </div>
     </>

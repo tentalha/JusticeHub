@@ -26,7 +26,7 @@ export const Login = () => {
     if (!userState.error && Object.keys(userState?.user)?.length) {
       navigate('/')
     }
-  }, [userState])
+  }, [userState, navigate])
 
   useEffect(() => {
     if (userState.error) {

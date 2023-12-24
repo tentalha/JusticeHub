@@ -30,16 +30,17 @@ export const forget_password = async (data) => {
 };
 
 export const reset_password = async (token, id, data) => {
-  console.log({token, id, data})
+  console.log({ token, id, data });
   try {
-    const response = await axiosInstance.post(`/auth/reset-password/?token=${token}&id=${id}`, {password:data});
+    const response = await axiosInstance.post(
+      `/auth/reset-password/?token=${token}&id=${id}`,
+      { password: data }
+    );
     return response;
   } catch (error) {
     return Promise.reject(error);
   }
 };
-
-
 
 export const me = async () => {
   try {
@@ -120,7 +121,7 @@ export const create_New_Criminal = async (data) => {
       ...data,
       image: data.image[0],
     };
-    
+
     for (const key in data) {
       formData.append(key, data[key]);
     }
@@ -139,7 +140,7 @@ export const update_Criminal = async (id, data) => {
       ...data,
       image: data.image[0],
     };
-    
+
     for (const key in data) {
       formData.append(key, data[key]);
     }
@@ -168,7 +169,7 @@ export const create_fir = async (data) => {
       relevantDocs: data.relevantDocs[0],
       datetime: formatDate(data?.datetime),
     };
-    
+
     for (const key in data) {
       formData.append(key, data[key]);
     }
@@ -225,11 +226,10 @@ export const get_Closed_FIRS = async () => {
   }
 };
 
-
-export const approve_FIR = async (id,data) => {
+export const approve_FIR = async (id, data) => {
   let obj = {
-    investigatorId : data
-  }
+    investigatorId: data,
+  };
   try {
     const response = await axiosInstance.post(`/firs/approve/${id}`, obj);
     return response;
@@ -248,7 +248,6 @@ export const delete_FIR = async (id) => {
 };
 
 export const update_Operator = async (id, data) => {
-  
   try {
     const response = await axiosInstance.patch(`/operators/${id}`, data);
     return response;
@@ -258,7 +257,6 @@ export const update_Operator = async (id, data) => {
 };
 
 export const update_Investigator = async (id, data) => {
-  
   try {
     const response = await axiosInstance.patch(`/investigators/${id}`, data);
     return response;
@@ -267,10 +265,11 @@ export const update_Investigator = async (id, data) => {
   }
 };
 
-
 export const update_Status = async (id, statusValue) => {
   try {
-    const response = await axiosInstance.get(`/firs/update-status/${id}?status=${statusValue}`);
+    const response = await axiosInstance.get(
+      `/firs/update-status/${id}?status=${statusValue}`
+    );
     return response;
   } catch (error) {
     return Promise.reject(error);
@@ -279,22 +278,45 @@ export const update_Status = async (id, statusValue) => {
 
 export const check_criminal_status = async (CNIC) => {
   try {
-    const response = await axiosInstance.get(`/criminals/check-status?CNIC=${CNIC?.CNIC}`);
+    const response = await axiosInstance.get(
+      `/criminals/check-status?CNIC=${CNIC?.CNIC}`
+    );
     return response;
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return Promise.reject(error);
   }
 };
 
-export const get_news = async () =>{
-  try{
-    const response = await axios.get("https://newsapi.org/v2/everything?q=pakistan&apiKey=f3ddb1799a1b4ce7a5ac1854b410d950");
+export const get_news = async () => {
+  try {
+    const response = await axios.get(
+      "https://newsapi.org/v2/everything?q=pakistan&apiKey=f3ddb1799a1b4ce7a5ac1854b410d950"
+    );
     return response.data.articles;
-  }
-  catch(error){
-    console.log(error);
+  } catch (error) {
     return Promise.reject(error);
-
   }
-}
+};
+
+export const getEvidences = async (firId) => {
+  try {
+    return await axiosInstance.get(`firs/${firId}/evidence`);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const postEvidence = async (firId, files) => {
+  try {
+    const formData = new FormData();
+
+    files.forEach((file) => {
+      formData.append("files", file);
+    });
+
+    // return await axiosInstance.post(`firs/${firId}/evidence`, formData);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

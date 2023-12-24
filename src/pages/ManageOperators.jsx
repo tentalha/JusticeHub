@@ -1,51 +1,48 @@
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import { getAllOperators } from "features";
-import { deleteOperator } from "features";
-import { Loader, UpdateOperator } from "components";
-import { Modal } from "components";
-import { Icon } from "components";
-
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { getAllOperators } from 'features'
+import { deleteOperator } from 'features'
+import { Loader, UpdateOperator } from 'components'
+import { Modal } from 'components'
+import { Icon } from 'components'
 
 export const ManageOperators = () => {
-  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false)
 
-  const [operatorId, setOperatorId] = useState("");
-  const { user } = useSelector((state) => state.user);
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const [operatorId, setOperatorId] = useState('')
+  const { user } = useSelector((state) => state.user)
+  const dispatch = useDispatch()
 
-  const [userType, setUserType] = useState("");
+  const [userType, setUserType] = useState('')
 
-  const operatorState = useSelector((state) => state.operator);
-  const operators = operatorState.operators;
+  const operatorState = useSelector((state) => state.operator)
+  const operators = operatorState.operators
 
   useEffect(() => {
-    dispatch(getAllOperators());
-  }, []);
-  
+    dispatch(getAllOperators())
+  }, [dispatch])
 
   return (
     <div className=" xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
-        {" "}
-        {/* Adjust the margin to match your sidebar width */}
-        <div className={`${isCreateModalOpen || isUpdateModalOpen ? "blur-sm" : ""}`}>
-
+      {' '}
+      {/* Adjust the margin to match your sidebar width */}
+      <div
+        className={`${isCreateModalOpen || isUpdateModalOpen ? 'blur-sm' : ''}`}
+      >
         <div
           className={`mt-0 flex flex-col sm:flex-row justify-between items-center `}
         >
-          <h1  className=" xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 ">
+          <h1 className=" xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 ">
             Admin Dashobard
           </h1>
-  
+
           <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
             <p className=" font-custom-blue font-semibold font-custom  ">
               FAQ | Contact Us | Help Center
             </p>
-  
+
             <h1 className=" max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500  mx-auto ">
               {user?.name}
             </h1>
@@ -173,7 +170,10 @@ export const ManageOperators = () => {
                           <td className="p-2 whitespace-nowrap">
                             <button
                               className="font-medium text-indigo-600 hover:text-indigo-800 hover:underline"
-                              onClick={()=>{setIsUpdateModalOpen(true); setOperatorId(operator._id)}}
+                              onClick={() => {
+                                setIsUpdateModalOpen(true)
+                                setOperatorId(operator._id)
+                              }}
                             >
                               Edit
                             </button>
@@ -196,8 +196,8 @@ export const ManageOperators = () => {
               <div className="flex justify-end mb-4 mr-2">
                 <button
                   onClick={() => {
-                    setIsCreateModalOpen(true);
-                    setUserType("operator");
+                    setIsCreateModalOpen(true)
+                    setUserType('operator')
                   }}
                   className="bg-custom-blue hover:bg-blue-600 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full transition duration-300 ease-in-out"
                   type="button"
@@ -209,23 +209,23 @@ export const ManageOperators = () => {
           </div>
         )}
       </div>
-  {isCreateModalOpen? (
-      <Modal
-        userType={userType}
-        isOpen={isCreateModalOpen}
-        onClose={() => setIsCreateModalOpen(false)}
-      />
-  ):null}
-  {isUpdateModalOpen?(
-  <UpdateOperator 
-    isOpen={isUpdateModalOpen}
-    onClose={()=> setIsUpdateModalOpen(false)}
-    operatorId={operatorId}
-  />
-  ):null}
+      {isCreateModalOpen ? (
+        <Modal
+          userType={userType}
+          isOpen={isCreateModalOpen}
+          onClose={() => setIsCreateModalOpen(false)}
+        />
+      ) : null}
+      {isUpdateModalOpen ? (
+        <UpdateOperator
+          isOpen={isUpdateModalOpen}
+          onClose={() => setIsUpdateModalOpen(false)}
+          operatorId={operatorId}
+        />
+      ) : null}
     </div>
-  );
-};
+  )
+}
 
 /*  <button data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
   Toggle modal
