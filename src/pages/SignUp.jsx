@@ -32,7 +32,7 @@ export const SignUp = () => {
         navigate('/')
       }, 1000)
     }
-  }, [userState])
+  }, [userState, navigate, reset])
 
   useEffect(() => {
     if (userState.error) {
@@ -41,6 +41,7 @@ export const SignUp = () => {
   }, [userState.error])
 
   const handleFormSubmit = (data) => {
+    // eslint-disable-next-line no-unused-vars
     const { confirmPassword, ...rest } = data
     dispatch(signUpUser(rest))
   }

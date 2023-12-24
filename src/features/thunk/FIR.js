@@ -1,5 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { approve_FIR, create_fir, delete_FIR, get_Active_FIRS, get_All_FIRS, get_Closed_FIRS, get_Completed_FIRS, get_Pending_FIRS, update_Status } from "services";
+import {
+  approve_FIR,
+  create_fir,
+  delete_FIR,
+  get_Active_FIRS,
+  get_All_FIRS,
+  get_Closed_FIRS,
+  get_Completed_FIRS,
+  get_Pending_FIRS,
+  update_Status,
+} from "services";
 
 export const createNewFir = createAsyncThunk(
   "createFIR",
@@ -25,7 +35,6 @@ export const getAllFIRS = createAsyncThunk(
   }
 );
 
-
 export const getPendingFIRS = createAsyncThunk(
   "getPendinglFIRS",
   async (_, { rejectWithValue }) => {
@@ -37,7 +46,6 @@ export const getPendingFIRS = createAsyncThunk(
     }
   }
 );
-
 
 export const getActiveFIRS = createAsyncThunk(
   "getActiveFIRS",
@@ -51,7 +59,6 @@ export const getActiveFIRS = createAsyncThunk(
   }
 );
 
-
 export const getCompletedFIRS = createAsyncThunk(
   "getCompletedFIRS",
   async (_, { rejectWithValue }) => {
@@ -63,7 +70,6 @@ export const getCompletedFIRS = createAsyncThunk(
     }
   }
 );
-
 
 export const getClosedFIRS = createAsyncThunk(
   "getClosedFIRS",
@@ -77,36 +83,34 @@ export const getClosedFIRS = createAsyncThunk(
   }
 );
 
-
 export const approveFir = createAsyncThunk(
   "approveFIR",
-  async ({id,selected}, { rejectWithValue }) => {
+  async ({ id, selected }, { rejectWithValue }) => {
     try {
-      const response = await approve_FIR(id,selected);
+      const response = await approve_FIR(id, selected);
       return response?.data;
-    } catch (error) { 
+    } catch (error) {
       return rejectWithValue(error?.response?.data);
     }
   }
 );
 
-
 export const deleteFIR = createAsyncThunk(
-  'deleteFIR',
-  async (id) => {
-    console.log(id);
+  "deleteFIR",
+  async (id, { rejectWithValue }) => {
     try {
       const response = await delete_FIR(id);
       return response?.data;
     } catch (error) {
-      throw error; // Let Redux Toolkit handle the error by rejecting the promise
+      // Let Redux Toolkit handle the error by rejecting the promise
+      return rejectWithValue(error?.response?.data);
     }
   }
 );
 
 export const updateStatus = createAsyncThunk(
   "updateStatus",
-  async ({id, statusValue}, { rejectWithValue }) => {
+  async ({ id, statusValue }, { rejectWithValue }) => {
     try {
       const response = await update_Status(id, statusValue);
       return response?.data;

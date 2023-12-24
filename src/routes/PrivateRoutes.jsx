@@ -1,10 +1,8 @@
 import {
   Cases,
-  Investigators,
   ManageInvestigators,
   ManageOperators,
   Citizen,
-  Operators,
   Inbox,
   ManageCriminals,
   CreateFIR,
@@ -58,7 +56,10 @@ export const PrivateRoutes = () => {
                 <Route path="/closedFIRs" element={<ClosedFIRs />} />
               ) : null}
               {user.role === 'admin' ? (
-                <Route path="/manageInvestigators" element={<ManageInvestigators />} />
+                <Route
+                  path="/manageInvestigators"
+                  element={<ManageInvestigators />}
+                />
               ) : null}
               {user.role === 'admin' ? (
                 <Route path="/manageOperators" element={<ManageOperators />} />
@@ -76,7 +77,10 @@ export const PrivateRoutes = () => {
                 <Route path="/firDetail/:id" element={<FirDetail />} />
               ) : null}
               {user.role === 'admin' ? (
-                <Route path="/pendingFirDetail/:id" element={<PendingFirDetail />} />
+                <Route
+                  path="/pendingFirDetail/:id"
+                  element={<PendingFirDetail />}
+                />
               ) : null}
               {user.role === 'citizen' ? (
                 <Route path="/inbox" element={<Inbox />} />
@@ -87,26 +91,32 @@ export const PrivateRoutes = () => {
               {user.role === 'citizen' ? (
                 <Route path="/citizenFIRs" element={<CitizenFIRs />} />
               ) : null}
-               {user.role === 'citizen' ? (
+              {user.role === 'citizen' ? (
                 <Route path="/firDetail/:id" element={<FirDetail />} />
               ) : null}
               {user.role === 'investigator' ? (
                 <Route path="/" element={<Investigator />} />
               ) : null}
-               {user.role === 'investigator' ? (
+              {user.role === 'investigator' ? (
                 <Route path="/assignedFIRs" element={<AssignedFIRs />} />
               ) : null}
               {user.role === 'investigator' ? (
                 <Route path="/firDetail/:id" element={<FirDetail />} />
               ) : null}
               {user.role === 'investigator' ? (
-                <Route path="/invesCompletedFIRs" element={<InvesCompletedFIRs />} />
+                <Route
+                  path="/invesCompletedFIRs"
+                  element={<InvesCompletedFIRs />}
+                />
               ) : null}
               {user.role === 'investigator' ? (
                 <Route path="/invesClosedFIRs" element={<InvesClosedFIRs />} />
               ) : null}
               {user.role === 'investigator' ? (
-                <Route path="/evidenceFolders" element={<EvidenceFolders />} />
+                <Route
+                  path="/evidenceFolders/:firId"
+                  element={<EvidenceFolders />}
+                />
               ) : null}
               {user.role === 'investigator' ? (
                 <Route path="/evidences" element={<Evidences />} />
@@ -121,7 +131,10 @@ export const PrivateRoutes = () => {
                 <Route path="/operatorFIRs" element={<OperatorFIRs />} />
               ) : null}
               {user.role === 'operator' ? (
-                <Route path="/checkCriminalStatus" element={<CheckCriminalStatus />} />
+                <Route
+                  path="/checkCriminalStatus"
+                  element={<CheckCriminalStatus />}
+                />
               ) : null}
               {user.role === 'operator' ? (
                 <Route path="/firDetail/:id" element={<FirDetail />} />

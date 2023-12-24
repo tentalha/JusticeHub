@@ -3,7 +3,6 @@ import { useDispatch } from "react-redux";
 import { CriminalModal, Icon, UpdateCriminal } from "components";
 import { useEffect, useState } from "react";
 import { getAllCriminals, deleteCriminal } from "features";
-import { Modal } from "components";
 import { Loader } from "components";
 import { useNavigate } from "react-router-dom";
 
@@ -20,7 +19,7 @@ export const ManageCriminals = () => {
 
    useEffect(() => {
      dispatch(getAllCriminals());
-  }, []);
+  }, [dispatch]);
 
 
   return (
