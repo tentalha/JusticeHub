@@ -315,7 +315,15 @@ export const postEvidence = async (firId, files) => {
       formData.append("files", file);
     });
 
-    // return await axiosInstance.post(`firs/${firId}/evidence`, formData);
+    return await axiosInstance.post(`firs/${firId}/evidence`, formData);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const deleteEvidenceId = async (id) => {
+  try {
+    return await axiosInstance.delete(`/firs/evidence/${id}`);
   } catch (error) {
     return Promise.reject(error);
   }

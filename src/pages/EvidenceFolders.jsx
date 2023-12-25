@@ -7,20 +7,15 @@ import { CreateEvidence } from './CreateEvidence'
 
 export const EvidenceFolders = () => {
   const { user } = useSelector((state) => state.user)
-  const { evidences } = useSelector((state) => state.evidence)
   const dispatch = useDispatch()
   const { firId } = useParams()
   const [isModalOpen, setIsModalOpen] = useState(false)
   const navigate = useNavigate()
 
   const handleEvidenceTypeClick = (type, extensions) => {
-    const filteredEvidences = evidences.filter((ev) =>
-      extensions.includes(ev.fileType),
-    )
     navigate('/evidences', {
       state: {
-        evdType: extensions.join(','),
-        evidences: filteredEvidences,
+        extensions,
         type,
       },
     })
