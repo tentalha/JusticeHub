@@ -3,12 +3,18 @@ import { uploadNewEvidence } from 'features'
 import { useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
-
+import { useEffect } from 'react'
 // eslint-disable-next-line react/prop-types
 export const CreateEvidence = ({ isOpen, onClose, firId }) => {
   const [uploadedFiles, setUploadedFiles] = useState([])
   const dispatch = useDispatch()
-  const { loading } = useSelector((state) => state.evidence)
+  const { loading, success } = useSelector((state) => state.evidence)
+
+  useEffect(() => {
+    if (success) {
+      onClose()
+    }
+  }, [success, onClose])
 
   const handleFileChange = (e) => {
     const files = e.target.files
