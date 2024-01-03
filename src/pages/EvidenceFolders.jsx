@@ -87,7 +87,7 @@ export const EvidenceFolders = () => {
             <div>
               <img
                 className="h-56 w-56"
-                src="./icons/folder.png"
+                src="/icons/folder.png"
                 onClick={() =>
                   handleEvidenceTypeClick('docs', [('pdf', 'doc')])
                 }
@@ -97,7 +97,7 @@ export const EvidenceFolders = () => {
             <div className="ml-20">
               <img
                 className="h-56 w-56"
-                src="./icons/folder.png"
+                src="/icons/folder.png"
                 onClick={() => handleEvidenceTypeClick('audio', ['mp3', 'wav'])}
               />
               <h1 className=" text-xl font-custom text-black ml-20">Audios</h1>
@@ -105,7 +105,7 @@ export const EvidenceFolders = () => {
             <div className="ml-20">
               <img
                 className="h-56 w-56"
-                src="./icons/folder.png"
+                src="/icons/folder.png"
                 onClick={() =>
                   handleEvidenceTypeClick('video', [
                     'mp4',
@@ -121,7 +121,7 @@ export const EvidenceFolders = () => {
             <div className="ml-20">
               <img
                 className="h-56 w-56"
-                src="./icons/folder.png"
+                src="/icons/folder.png"
                 onClick={() =>
                   handleEvidenceTypeClick('pictures', [
                     'png',

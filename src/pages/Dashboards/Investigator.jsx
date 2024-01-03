@@ -19,13 +19,10 @@ export const Investigator = () => {
 
   useEffect(() => {
     if (firs.length) {
-      const invesActiveFIRs = firs?.filter((elem) => elem.status === 'active')
-        .length
-      const invesCompletedFIRs = firs?.filter(
-        (elem) => elem.status === 'completed',
-      ).length
-      const invesClosedFIRs = firs?.filter((elem) => elem.status === 'closed')
-        .length
+      
+      const invesActiveFIRs = (firs?.filter((elem) => elem.status === 'active')?.length) ?? 0;
+      const invesCompletedFIRs = (firs?.filter((elem) => elem.status === 'completed')?.length) ?? 0;
+      const invesClosedFIRs = (firs?.filter((elem) => elem.status === 'closed')?.length) ?? 0;
       setLengths({ invesActiveFIRs, invesClosedFIRs, invesCompletedFIRs })
 
       setDonutState({
