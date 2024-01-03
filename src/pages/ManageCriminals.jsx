@@ -17,9 +17,14 @@ export const ManageCriminals = () => {
   const criminalState = useSelector((state) => state.criminal);
   const criminals = criminalState.criminals;
 
+   
+  useEffect(() =>{
+    console.log(criminals);
+  },[]);
+  
    useEffect(() => {
      dispatch(getAllCriminals());
-  }, [dispatch]);
+  }, []);
 
 
   return (
@@ -129,13 +134,13 @@ export const ManageCriminals = () => {
       </div>
     ) : (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 mt-5 lg:grid-cols-4 gap-4">
-        {criminals.map((criminal) => (
+        {criminals?.map((criminal) => (
           <div
             key={criminal._id}
             className="mb-20 ml-2 transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out"
           >
             <img
-              src={criminal.image.url}
+              src={criminal?.image?.url || '/icons/criminal.png'}
               alt="random image"
               className="w-96 h-72 object-center rounded-lg shadow-md"
             />

@@ -12,3 +12,5 @@ export * from "./UpdateOperator";
 export * from "./UpdateInvestigator";
 export * from "./UpdateStatus";
 export * from "./EvidenceGrid";
+export * from "./AvailableChats";
+export * from "./ChatPage";

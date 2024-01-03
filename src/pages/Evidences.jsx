@@ -1,20 +1,20 @@
-import { useSelector } from 'react-redux'
-import { EvidenceGrid, Icon } from 'components'
-import { useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useSelector } from "react-redux";
+import { EvidenceGrid, Icon } from "components";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 export const Evidences = () => {
-  const { user } = useSelector((state) => state.user)
-  const { evidences } = useSelector((state) => state.evidence)
-  const [filteredEvidences, setFilteredEvidences] = useState([])
-  const location = useLocation()
-  const { extensions, type } = location.state
+  const { user } = useSelector((state) => state.user);
+  const { evidences } = useSelector((state) => state.evidence);
+  const [filteredEvidences, setFilteredEvidences] = useState([]);
+  const location = useLocation();
+  const { extensions, type } = location.state;
 
   useEffect(() => {
     setFilteredEvidences(
-      evidences.filter((ev) => extensions.includes(ev.fileType)),
-    )
-  }, [evidences, extensions])
+      evidences.filter((ev) => extensions.includes(ev.fileType))
+    );
+  }, [evidences, extensions]);
 
   return (
     <div className="xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
@@ -72,5 +72,5 @@ export const Evidences = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};

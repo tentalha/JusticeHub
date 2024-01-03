@@ -30,6 +30,7 @@ export const CriminalModal = ({isOpen, onClose,}) =>{
     const handleFormSubmit = (data) =>{
         dispatch(createNewCriminal(data)).then (()=>{
         reset();
+        navigate("/manageCriminals") 
         toast.success("Registered Successfully!");
         onClose();
         })
