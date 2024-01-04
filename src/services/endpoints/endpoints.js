@@ -328,3 +328,19 @@ export const deleteEvidenceId = async (id) => {
     return Promise.reject(error);
   }
 };
+
+export const fetchContacts = async () => {
+  try {
+    return await axiosInstance.get("/users/contacts");
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};
+
+export const fetchMessages = async (receiverId) => {
+  try {
+    return await axiosInstance.get("/messages?rec=" + receiverId);
+  } catch (error) {
+    return Promise.reject(error);
+  }
+};

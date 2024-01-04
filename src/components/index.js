@@ -14,3 +14,5 @@ export * from "./UpdateStatus";
 export * from "./EvidenceGrid";
 export * from "./AvailableChats";
 export * from "./ChatPage";
+export * from "./ChatBox";
+export * from "./MessageTile";

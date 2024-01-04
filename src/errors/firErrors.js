@@ -1,5 +1,5 @@
 export const IdentifyErrorForFIR = (error) => {
-  switch (error.errType) {
+  switch (error?.errType) {
     case "UN-AUTHORIZED":
       return "Email or Password is invalid!";
     case "INTERNAL-SERVER-ERROR":

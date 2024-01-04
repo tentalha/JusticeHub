@@ -14,15 +14,20 @@ export const Investigator = () => {
   const [donutState, setDonutState] = useState()
   const [lengths, setLengths] = useState({})
   useEffect(() => {
-    dispatch(getAllFIRS())
+    if (!firs.length) {
+      dispatch(getAllFIRS())
+    }
   }, [])
 
   useEffect(() => {
     if (firs.length) {
-      
-      const invesActiveFIRs = (firs?.filter((elem) => elem.status === 'active')?.length) ?? 0;
-      const invesCompletedFIRs = (firs?.filter((elem) => elem.status === 'completed')?.length) ?? 0;
-      const invesClosedFIRs = (firs?.filter((elem) => elem.status === 'closed')?.length) ?? 0;
+      const invesActiveFIRs = firs?.filter((elem) => elem?.status === 'active')
+        .length
+      const invesCompletedFIRs = firs?.filter(
+        (elem) => elem?.status === 'completed',
+      ).length
+      const invesClosedFIRs = firs?.filter((elem) => elem?.status === 'closed')
+        .length
       setLengths({ invesActiveFIRs, invesClosedFIRs, invesCompletedFIRs })
 
       setDonutState({

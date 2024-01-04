@@ -4,7 +4,8 @@ import { useDispatch } from 'react-redux'
 // eslint-disable-next-line react/prop-types
 export const EvidenceGrid = ({ type, evidences }) => {
   const dispatch = useDispatch()
-  const handleEvidenceDelete = (evdId) => {
+
+  function handleEvidenceDelete(evdId) {
     dispatch(deleteEvidence({ id: evdId }))
   }
 

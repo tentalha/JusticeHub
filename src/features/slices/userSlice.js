@@ -1,13 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IdentifyErrorForAuth } from "errors";
-import { forgetPassword, resetPassword, signInUser, signUpUser } from "features";
+import {
+  forgetPassword,
+  resetPassword,
+  signInUser,
+  signUpUser,
+} from "features";
 
 const initialState = {
   user: {},
   error: null,
   loading: false,
   link: "",
-  isSuccess:false
+  isSuccess: false,
+  userSocket: null,
 };
 
 const userSlice = createSlice({
@@ -16,6 +22,9 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, { payload }) => {
       state.user = payload;
+    },
+    setUserSocket: (state, { payload }) => {
+      state.userSocket = payload;
     },
   },
   extraReducers: (builder) => {
@@ -58,7 +67,7 @@ const userSlice = createSlice({
       })
       .addCase(resetPassword.fulfilled, (state, { payload: { payload } }) => {
         state.loading = false;
-        state.isSuccess = true
+        state.isSuccess = true;
       })
       .addCase(resetPassword.pending, (state) => {
         state.error = null;
@@ -71,5 +80,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser } = userSlice.actions;
+export const { setUser, setUserSocket } = userSlice.actions;
 export default userSlice.reducer;

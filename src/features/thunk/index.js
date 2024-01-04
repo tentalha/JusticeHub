@@ -5,3 +5,4 @@ export * from "./Investigator";
 export * from "./Criminals";
 export * from "./FIR";
 export * from "./Evidence";
+export * from "./Chat";

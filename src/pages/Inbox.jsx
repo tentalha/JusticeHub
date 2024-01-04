@@ -1,28 +1,23 @@
-import { useSelector } from 'react-redux'
-import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux'
+import { useState, useEffect } from 'react'
 import { AvailableChats, ChatPage, Icon } from 'components'
+import { getContacts } from 'features'
 
 export const Inbox = () => {
-  const { user } = useSelector((state) => state.user);
-  const [selectedContact, setSelectedContact] = useState(null);
+  const dispatch = useDispatch()
+  const { user } = useSelector((state) => state.user)
+  const { contacts } = useSelector((state) => state.chat)
+  const [selectedContact, setSelectedContact] = useState('')
+
+  useEffect(() => {
+    if (!contacts.length) {
+      dispatch(getContacts())
+    }
+  }, [dispatch, contacts])
 
   const handleContactClick = (contact) => {
-    setSelectedContact(contact);
-  };
-
- 
-  const contacts = [
-    {
-      id: 1,
-      name: 'John',
-      lastMessage: 'Hello there!',
-    },
-    {
-      id: 2,
-      name: 'Jane',
-      lastMessage: 'How are you doing?',
-    },
-  ];
+    setSelectedContact(contact)
+  }
 
   return (
     <div className="xl:ml-52 xl:mr-4 container mx-auto max-w-screen-xl mb-20 shadow-lg rounded-lg">
@@ -47,20 +42,24 @@ export const Inbox = () => {
       <hr className="h-2 mt-4 bg-custom-blue"></hr>
       <br />
       <h1 className="bg-gray-100 hover:text-white hover:bg-black p-3 rounded-2xl xl:ml-4 xl:mr-4 sm:ml-0 sm:mr-0 text-sm sm:text-md md:text-lg lg:text-xl font-bold font-custom text-center transform scale-100 hover:scale-95 transition-transform duration-300 ease-in-out">
-        Hey {user?.name}, you can monitor your FIRs and interact with your investigator to get updates related to your respective FIR
+        Hey {user?.name}, you can monitor your FIRs and interact with your
+        investigator to get updates related to your respective FIR
       </h1>
       <br />
       <div>
-        <h1>Search for any chat, just type the name of the Person.</h1>
+        <h1 className="text-lg ml-4 font-bold">Available Investigators</h1>
       </div>
       <div className="flex">
         <div className="flex-shrink-0 w-2/6">
-          <AvailableChats contacts={contacts} handleContactClick={handleContactClick}  />
+          <AvailableChats
+            contacts={contacts}
+            handleContactClick={handleContactClick}
+          />
         </div>
         <div className="flex-shrink-0 w-4/6">
           <ChatPage selectedContact={selectedContact} />
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

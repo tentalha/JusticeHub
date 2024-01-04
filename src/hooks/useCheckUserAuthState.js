@@ -11,21 +11,21 @@ export const useCheckUserAuthState = () => {
   const { user } = useSelector((state) => state.user);
 
   useEffect(() => {
+    const checkForAuth = async () => {
+      try {
+        if (!Object.keys(user)?.length) {
+          const userData = (await me())?.data?.payload;
+          dispatch(setUser(userData?.user));
+        }
+      } catch (error) {
+        if (error?.response?.status == 401) {
+          signOut();
+        }
+      }
+    };
+
     const jwt = retrieveJWT();
     //If JWT exists then check if it is valid otherwise navigate to login page
     jwt ? checkForAuth() : navigate("/login");
-  }, []);
-
-  const checkForAuth = async () => {
-    try {
-      if (!Object.keys(user)?.length) {
-        const userData = (await me())?.data?.payload;
-        dispatch(setUser(userData?.user));
-      }
-    } catch (error) {
-      if (error?.response?.status == 401) {
-        signOut();
-      }
-    }
-  };
+  }, [navigate, dispatch, user]);
 };
