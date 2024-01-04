@@ -5,6 +5,7 @@ import investigatorReducer from "features/slices/investigatorSlice";
 import criminalReducer from "features/slices/criminalSlice";
 import firReducer from "features/slices/firSlice";
 import evidenceReducer from "features/slices/EvidenceSlice";
+import chatReducer from "features/slices/chatSlice";
 
 export const reducer = combineReducers({
   user: userReducer,
@@ -13,4 +14,5 @@ export const reducer = combineReducers({
   criminal: criminalReducer,
   fir: firReducer,
   evidence: evidenceReducer,
+  chat: chatReducer,
 });

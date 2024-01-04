@@ -24,15 +24,51 @@ import {
   EvidenceFolders,
   Evidences,
 } from 'pages'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useCheckUserAuthState } from 'hooks'
 import { Loader, MainLayout, Protected } from 'components'
 import { Route, Routes } from 'react-router-dom'
 import { FirDetail } from 'pages/FirDetail'
+import { useEffect } from 'react'
+import { io } from 'socket.io-client'
+import { SOCKET_CHAT_URL } from 'constant'
+import { retrieveJWT } from 'helpers'
+import { setUserSocket } from 'features/slices/userSlice'
+import { toast } from 'react-toastify'
+import useSound from 'use-sound'
+import { pushNewMessage } from 'features/slices/chatSlice'
 
 export const PrivateRoutes = () => {
+  const [play] = useSound('/notification.wav')
+  const dispatch = useDispatch()
   const { user } = useSelector((state) => state.user)
   useCheckUserAuthState()
+  //Make socket connection as soon as user logs in
+  useEffect(() => {
+    const socket = io(SOCKET_CHAT_URL, {
+      extraHeaders: {
+        'x-auth': retrieveJWT(), //Sending JWT for authentication.
+      },
+    })
+
+    socket.on('connect', () => {
+      console.log('Connected to the server')
+      dispatch(setUserSocket(socket))
+    })
+
+    //Notification on receiving new message.
+    socket.on('receive_message', (newMessage) => {
+      dispatch(pushNewMessage(newMessage))
+      play()
+      toast.success(`New Message Received! ${newMessage?.message}`)
+    })
+
+    return () => {
+      socket.disconnect()
+      dispatch(setUserSocket(null))
+      console.log('Disconnected from the server')
+    }
+  }, [dispatch, play])
 
   return (
     <div>
@@ -82,7 +118,7 @@ export const PrivateRoutes = () => {
                   element={<PendingFirDetail />}
                 />
               ) : null}
-              {user.role === 'citizen' ? (
+              {['citizen', 'investigator'].includes(user.role) ? (
                 <Route path="/inbox" element={<Inbox />} />
               ) : null}
               {user.role === 'citizen' ? (
