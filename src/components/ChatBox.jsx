@@ -24,6 +24,7 @@ export const ChatBox = ({ selectedContact }) => {
       receiver: selectedContact,
       sender: user?._id,
     }
+
     dispatch(pushNewMessage(newMessage))
 
     userSocket.emit('send_message', {
