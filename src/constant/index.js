@@ -1,4 +1,4 @@
-export const BASE_URL = "http://16.170.208.107/backend/api";
+export const BASE_URL = "http://13.53.187.10/backend/api";
 // export const BASE_URL = "http://localhost:3500/backend/api";
 
 export const SOCKET_CHAT_URL = "http://16.170.208.107/chat";
