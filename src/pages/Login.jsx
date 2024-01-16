@@ -7,6 +7,7 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { loginSchema } from 'schema'
 import { toast } from 'react-toastify'
+import { nullifyError } from 'features/slices/userSlice'
 
 export const Login = () => {
   const dispatch = useDispatch()
@@ -33,6 +34,10 @@ export const Login = () => {
       toast.error(userState.error)
     }
   }, [userState.error])
+
+  useEffect(() => {
+    dispatch(nullifyError())
+  }, [])
 
   const onFormSubmit = (data) => dispatch(signInUser(data))
 
@@ -94,7 +99,7 @@ export const Login = () => {
               to="/emailVerification"
               className="mr-4 text-blue-500 hover:underline font-bold "
             >
-            Forget Password?
+              Forget Password?
             </Link>
           </div>
         </form>

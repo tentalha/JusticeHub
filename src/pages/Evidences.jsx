@@ -1,21 +1,22 @@
-import { useSelector } from "react-redux";
-import { EvidenceGrid, Icon } from "components";
-import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useSelector } from 'react-redux'
+import { EvidenceGrid, Icon } from 'components'
+import { useLocation } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export const Evidences = () => {
-  const { user } = useSelector((state) => state.user);
-  const { evidences } = useSelector((state) => state.evidence);
-  const [filteredEvidences, setFilteredEvidences] = useState([]);
-  const location = useLocation();
-  const { extensions, type } = location.state;
+  const { user } = useSelector((state) => state.user)
+  const { evidences } = useSelector((state) => state.evidence)
+  const [filteredEvidences, setFilteredEvidences] = useState([])
+  const location = useLocation()
+  const { extensions, type } = location.state
 
   useEffect(() => {
     setFilteredEvidences(
-      evidences.filter((ev) => extensions.includes(ev.fileType))
-    );
-  }, [evidences, extensions]);
-
+      evidences.filter((ev) => extensions.includes(ev.fileType)),
+    )
+  }, [evidences, extensions])
+  console.log(filteredEvidences)
   return (
     <div className="xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
       {/* <div className={`${isModalOpen  ? "blur-sm" : ""}`}> */}
@@ -29,7 +30,8 @@ export const Evidences = () => {
 
         <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
           <p className="font-custom-blue font-semibold font-custom ">
-          <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
+            <Link to="/faqs">FAQ</Link> |{' '}
+            <Link to="/contactus">Contact Us</Link>
           </p>
 
           <h1 className="max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 mx-auto ">
@@ -72,5 +74,5 @@ export const Evidences = () => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}

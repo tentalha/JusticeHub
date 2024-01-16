@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { AiFillDelete } from 'react-icons/ai'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect } from 'react'
+import { toggleSuccess } from 'features/slices/EvidenceSlice'
 // eslint-disable-next-line react/prop-types
 export const CreateEvidence = ({ isOpen, onClose, firId }) => {
   const [uploadedFiles, setUploadedFiles] = useState([])
@@ -15,6 +16,12 @@ export const CreateEvidence = ({ isOpen, onClose, firId }) => {
       onClose()
     }
   }, [success, onClose])
+
+  useEffect(() => {
+    if (success) {
+      dispatch(toggleSuccess(false))
+    }
+  }, [])
 
   const handleFileChange = (e) => {
     const files = e.target.files

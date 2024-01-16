@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useLayoutEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -8,6 +8,7 @@ import InputMask from 'react-input-mask'
 import { useForm } from 'react-hook-form'
 import { registerSchema } from 'schema'
 import { toast } from 'react-toastify'
+import { nullifyError } from 'features/slices/userSlice'
 
 export const SignUp = () => {
   const dispatch = useDispatch()
@@ -39,6 +40,10 @@ export const SignUp = () => {
       toast.error(userState.error)
     }
   }, [userState.error])
+
+  useLayoutEffect(() => {
+    dispatch(nullifyError())
+  }, [])
 
   const handleFormSubmit = (data) => {
     // eslint-disable-next-line no-unused-vars

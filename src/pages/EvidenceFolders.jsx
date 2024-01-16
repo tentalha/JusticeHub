@@ -4,6 +4,7 @@ import { Icon } from 'components'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getEvidenceWithFIRId } from 'features'
 import { CreateEvidence } from './CreateEvidence'
+import { Link } from 'react-router-dom'
 
 export const EvidenceFolders = () => {
   const { user } = useSelector((state) => state.user)
@@ -37,7 +38,8 @@ export const EvidenceFolders = () => {
 
           <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
             <p className="font-custom-blue font-semibold font-custom ">
-            <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
+              <Link to="/faqs">FAQ</Link> |{' '}
+              <Link to="/contactus">Contact Us</Link>
             </p>
 
             <h1 className="max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 mx-auto ">
@@ -88,9 +90,7 @@ export const EvidenceFolders = () => {
               <img
                 className="h-56 w-56"
                 src="/icons/folder.png"
-                onClick={() =>
-                  handleEvidenceTypeClick('docs', [('pdf', 'doc')])
-                }
+                onClick={() => handleEvidenceTypeClick('docs', ['pdf', 'doc'])}
               />
               <h1 className=" text-xl font-custom text-black ml-20">Files</h1>
             </div>

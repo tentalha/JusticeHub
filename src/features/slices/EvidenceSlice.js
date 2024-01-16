@@ -16,7 +16,11 @@ const initialState = {
 const criminalSlice = createSlice({
   name: "evidence",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleSuccess: (state, { payload }) => {
+      state.success = payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getEvidenceWithFIRId.fulfilled, (state, { payload }) => {
       state.evidences = payload?.evidences;
@@ -24,6 +28,7 @@ const criminalSlice = createSlice({
     builder.addCase(uploadNewEvidence.fulfilled, (state, { payload }) => {
       toast.success("Uploaded Successfully!");
       state.evidences = [...state.evidences, ...payload.data];
+      state.loading = false;
       state.success = true;
     });
     builder.addCase(uploadNewEvidence.pending, (state) => {
@@ -31,9 +36,9 @@ const criminalSlice = createSlice({
       state.success = false;
     });
     builder.addCase(uploadNewEvidence.rejected, (state) => {
-      state.loading = true;
-      toast.error("Uploaded Failed!");
+      state.loading = false;
       state.success = false;
+      toast.error("Uploaded Failed!");
     });
     builder.addCase(deleteEvidence.fulfilled, (state, { payload }) => {
       state.evidences = state.evidences.filter(
@@ -47,4 +52,5 @@ const criminalSlice = createSlice({
   },
 });
 
+export const { toggleSuccess } = criminalSlice.actions;
 export default criminalSlice.reducer;

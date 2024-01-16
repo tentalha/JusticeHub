@@ -26,6 +26,9 @@ const userSlice = createSlice({
     setUserSocket: (state, { payload }) => {
       state.userSocket = payload;
     },
+    nullifyError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -80,5 +83,5 @@ const userSlice = createSlice({
   },
 });
 
-export const { setUser, setUserSocket } = userSlice.actions;
+export const { setUser, setUserSocket, nullifyError } = userSlice.actions;
 export default userSlice.reducer;
