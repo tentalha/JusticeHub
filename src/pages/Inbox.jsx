@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { useState, useEffect } from 'react'
 import { AvailableChats, ChatPage, Icon } from 'components'
 import { getContacts } from 'features'
+import { Link } from 'react-router-dom'
 
 export const Inbox = () => {
   const dispatch = useDispatch()
@@ -28,7 +29,7 @@ export const Inbox = () => {
 
         <div className="flex mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
           <p className="font-custom-blue font-semibold font-custom">
-            FAQ | Contact Us | Help Center
+          <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
           </p>
 
           <h1 className="max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 mx-auto">
@@ -47,7 +48,11 @@ export const Inbox = () => {
       </h1>
       <br />
       <div>
-        <h1 className="text-lg ml-4 font-bold">Available Investigators</h1>
+        {user.role == 'citizen'?(
+        <h1 className="text-lg ml-4 font-bold font-custom">Available Investigators</h1>
+        ):(
+          <h1 className="text-lg ml-4 font-bold font-custom">Available Citizen</h1> 
+        )}
       </div>
       <div className="flex">
         <div className="flex-shrink-0 w-2/6">

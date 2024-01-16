@@ -42,10 +42,9 @@ const criminalSlice = createSlice({
         state.error = IdentifyErrorForCriminal(error);
       })
       .addCase(deleteCriminal.fulfilled,(state, { payload: { payload } }) => {
-        state.loading = false;
-        let id = (payload.payload.criminal._id)
+        let id = (payload.payload.criminals._id)
         state.criminals = state.criminals.filter((elem) => elem._id !== id);
-
+        state.loading = false;
         })
       .addCase(deleteCriminal.pending, (state) => {
         state.error = null;

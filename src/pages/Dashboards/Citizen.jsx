@@ -1,9 +1,10 @@
 import { useSelector } from "react-redux";
 import SplitType from "split-type";
 import gsap from "gsap";
-import { Icon } from "components";
+import { Icon, Loader } from "components";
 import { get_news } from "services";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export const Citizen = () => {
   const { user } = useSelector((state) => state.user);
@@ -45,7 +46,7 @@ export const Citizen = () => {
 
         <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
           <p className=" font-custom-blue font-semibold font-custom  ">
-            FAQ | Contact Us | Help Center
+            <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
           </p>
 
           <h1 className=" max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500  mx-auto ">
@@ -65,6 +66,7 @@ export const Citizen = () => {
       <h1 className=" mx-3 md:mx-4 xl:mx-12 mt-1 border-l-8 border-l-custom-blue text-xl md:text-2xl lg:text-3xl font-bold font-custom bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500">
         Announcements
       </h1>
+      {data? (
       <div className="flex flex-col md:flex-row">
   {data.length && data.slice(0, 3).map((item) => (
     <div
@@ -101,12 +103,21 @@ export const Citizen = () => {
     </div>
   ))}
 </div>
+      ):(
+        <div className=" text-center justify-center">
+         <h1 className="text-center text-2xl font-custom font-semibold ">
+            Gathering Announcements For You...
+        </h1>
+        
+        </div>
+      )}
 
        
       <br />
       <h1 className=" md:mx-4 xl:mx-12 mt-1 border-l-8 border-l-custom-blue text-xl md:text-2xl lg:text-3xl font-bold font-custom bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500">
         Latest News
       </h1>
+      {data?(
       <div className="mb-20 flex flex-col md:flex-row">
   {data.length && data.slice(0, 3).map((item) => (
     <div
@@ -147,6 +158,14 @@ export const Citizen = () => {
     </div>
   ))}
 </div>
+      ):(
+        <div className=" text-center justify-center">
+        <h1 className="text-center text-2xl font-custom font-semibold ">
+           The news is on the way BUDDY...
+       </h1>
+       
+       </div>
+      )}
 
 
 

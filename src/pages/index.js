@@ -28,3 +28,5 @@ export * from "./CheckCriminalStatus";
 export * from "./EvidenceFolders";
 export * from "./CreateEvidence";
 export * from "./Evidences";
+export * from "./FAQs";
+export * from "./ContactUs";
