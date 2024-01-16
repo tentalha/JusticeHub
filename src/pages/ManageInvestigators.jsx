@@ -7,6 +7,7 @@ import { getAllInvestigators } from "features";
 import { Loader, UpdateInvestigator } from "components";
 import { Modal } from "components";
 import { Icon } from "components";
+import { Link } from "react-router-dom";
 
 export const ManageInvestigators = () => {
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
@@ -41,7 +42,7 @@ export const ManageInvestigators = () => {
   
           <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
             <p className=" font-custom-blue font-semibold font-custom  ">
-              FAQ | Contact Us | Help Center
+            <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
             </p>
   
             <h1 className=" max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500  mx-auto ">
@@ -68,48 +69,18 @@ export const ManageInvestigators = () => {
             Investigators
           </h1>
 
-          <div className="flex justify-self-end mt-2 xl:mr-20 sm:mr-0 sm:mt-0">
-            <form>
-              <label
-                htmlFor="default-search"
-                className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white"
-              >
-                Search
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg
-                    className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="search"
-                  id="default-search"
-                  className="rounded-3xl block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-100 bg-gray-100 focus:ring-blue-500 focus:border-blue-500  dark:border-gray-100 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="search"
-                  required
-                />
+          <div className="flex justify-end mb-4 mr-20">
                 <button
-                  type="submit"
-                  className="rounded-3xl text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-sm px-4 py-2 dark:bg-custom-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  onClick={() => {
+                    setIsCreateModalOpen(true);
+                    setUserType("investigator");
+                  }}
+                  className="bg-custom-blue hover:bg-blue-600 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full transition duration-300 ease-in-out"
+                  type="button"
                 >
-                  Go
+                  Create New
                 </button>
               </div>
-            </form>
-          </div>
         </div>
 
         {investigatorState.loading ? (
@@ -192,19 +163,6 @@ export const ManageInvestigators = () => {
                     </tbody>
                   </table>
                 </div>
-              </div>
-
-              <div className="flex justify-end mb-4 mr-2">
-                <button
-                  onClick={() => {
-                    setIsCreateModalOpen(true);
-                    setUserType("investigator");
-                  }}
-                  className="bg-custom-blue hover:bg-blue-600 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-full transition duration-300 ease-in-out"
-                  type="button"
-                >
-                  Create New
-                </button>
               </div>
             </div>
           </div>

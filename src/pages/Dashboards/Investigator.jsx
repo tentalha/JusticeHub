@@ -61,7 +61,7 @@ export const Investigator = () => {
 
         <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
           <p className=" font-custom-blue font-semibold font-custom  ">
-            FAQ | Contact Us | Help Center
+          <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
           </p>
 
           <h1 className=" max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500  mx-auto ">

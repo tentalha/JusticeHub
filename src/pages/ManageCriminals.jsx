@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { getAllCriminals, deleteCriminal } from "features";
 import { Loader } from "components";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export const ManageCriminals = () => {
   const { user } = useSelector((state) => state.user);
@@ -16,16 +17,12 @@ export const ManageCriminals = () => {
 
   const criminalState = useSelector((state) => state.criminal);
   const criminals = criminalState.criminals;
-
-   
-  useEffect(() =>{
-    console.log(criminals);
-  },[]);
   
    useEffect(() => {
      dispatch(getAllCriminals());
-  }, []);
+     console.log(criminalState.loading);
 
+  }, []);
 
   return (
     <div className="xl:flex-1 xl:overflow-y-auto xl:ml-52 xs:ml-0 lg:flex-1 mb-20 lg:overflow-y-auto lg:ml-52 md:flex-1 md:overflow-y-auto md:ml-52 sm:flex-1 sm:overflow-y-auto sm:ml-52">
@@ -36,7 +33,7 @@ export const ManageCriminals = () => {
       </h1>
       <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
         <p className="font-custom-blue font-semibold font-custom">
-          FAQ | Contact Us | Help Center
+        <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
         </p>
         <h1 className="max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 mx-auto">
           {user?.name}
@@ -72,48 +69,6 @@ export const ManageCriminals = () => {
       </div>
     </div>
     <div className="flex sm:flex-row justify-between items-center">
-      <div className="flex justify-end mb-4 mr-2 xl:px-20">
-        <form>
-          <label
-            htmlFor="default-search"
-            className="text-sm font-medium text-gray-900 sr-only dark:text-white"
-          >
-            Search
-          </label>
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-              <svg
-                className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                />
-              </svg>
-            </div>
-            <input
-              type="search"
-              id="default-search"
-              className="rounded-3xl block w-full h-14 pl-10 text-sm text-gray-900 border border-gray-100 bg-gray-100 focus:ring-blue-500 focus:border-blue-500 dark:border-gray-100 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-              placeholder="Search"
-              required
-            />
-            <button
-              type="submit"
-              className="rounded-3xl absolute text-white right-2.5 bottom-1.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium text-md px-6 py-3 dark:bg-custom-blue dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              Go
-            </button>
-          </div>
-        </form>
-      </div>
       <div className="flex justify-self-end mt-2 xl:mr-40 mb-4 sm:mr-0 sm:mt-0">
         <button
           onClick={() => {

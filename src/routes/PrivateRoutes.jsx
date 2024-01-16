@@ -23,6 +23,8 @@ import {
   CheckCriminalStatus,
   EvidenceFolders,
   Evidences,
+  FAQs,
+  ContactUs,
 } from 'pages'
 import { useDispatch, useSelector } from 'react-redux'
 import { useCheckUserAuthState } from 'hooks'
@@ -76,9 +78,6 @@ export const PrivateRoutes = () => {
         <Routes>
           <Route element={<MainLayout />}>
             <Route element={<Protected />}>
-              {user.role === 'citizen' ? (
-                <Route path="/cases" element={<Cases />} />
-              ) : null}
               {user.role === 'admin' ? (
                 <Route path="/pendingFIRs" element={<PendingFIRs />} />
               ) : null}
@@ -174,6 +173,12 @@ export const PrivateRoutes = () => {
               ) : null}
               {user.role === 'operator' ? (
                 <Route path="/firDetail/:id" element={<FirDetail />} />
+              ) : null}
+              {user.role === 'operator' || 'citizen' || 'investigator' || 'admin' ? (
+                <Route path="/faqs" element={<FAQs />} />
+              ) : null}
+               {user.role === 'operator' || 'citizen' || 'investigator' || 'admin' ? (
+                <Route path="/contactus" element={<ContactUs />} />
               ) : null}
             </Route>
           </Route>

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 export const Footer = ()=>{
 return(
     
@@ -6,16 +8,13 @@ return(
     </span>
     <ul class="flex flex-wrap items-center mt-3 text-sm sm:text-xs font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">About</a>
+            <Link to="/contactus" class="mr-4 hover:underline md:mr-6">Contact Us</Link>
         </li>
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Privacy Policy</a>
+            <Link to="#" class="mr-4 hover:underline md:mr-6">Help Center</Link>
         </li>
         <li>
-            <a href="#" class="mr-4 hover:underline md:mr-6">Home</a>
-        </li>
-        <li>
-            <a href="#" class="hover:underline">Contact</a>
+            <Link to="/faqs" class="hover:underline">FAQs</Link>
         </li>
     </ul>
 </footer>

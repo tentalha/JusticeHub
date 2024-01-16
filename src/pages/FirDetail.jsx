@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux'
 import { Icon } from 'components'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { getAllFIRS } from 'features'
 import { Loader } from 'components'
@@ -34,12 +34,13 @@ export const FirDetail = () => {
         className={`mt-0 flex flex-col sm:flex-row justify-between items-center `}
       >
         <h1 className=" xl:ml-20 sm:ml-0 max-w-sm text-4xl top-0 font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500 ">
-          Admin Dashobard
+          
+          {user.role.toUpperCase()} Dashobard
         </h1>
 
         <div className="flex justify-self-auto mt-2 xl:mr-8 sm:mr-0 sm:mt-0">
           <p className=" font-custom-blue font-semibold font-custom  ">
-            FAQ | Contact Us | Help Center
+          <Link to="/faqs">FAQ</Link> | <Link to="/contactus">Contact Us</Link>
           </p>
 
           <h1 className=" max-w-sm ml-20 mr-1 text-xl font-bold font-custom text-center justify-center  bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-blue-700 to-cyan-500  mx-auto ">
