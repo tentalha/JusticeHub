@@ -1,7 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IdentifyErrorForCriminal } from "errors";
-import { checkCriminalStatus, createNewCriminal, deleteCriminal, getAllCriminals, updateCriminal } from "features/thunk";
-
+import {
+  checkCriminalStatus,
+  createNewCriminal,
+  deleteCriminal,
+  getAllCriminals,
+  updateCriminal,
+} from "features/thunk";
 
 const initialState = {
   criminals: [],
@@ -16,12 +21,10 @@ const criminalSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(
-        getAllCriminals.fulfilled,(state, { payload: { payload } }) => {
-          state.criminals = payload.criminals;
-          state.loading = false;
-        }
-      )
+      .addCase(getAllCriminals.fulfilled, (state, { payload: { payload } }) => {
+        state.criminals = payload.criminals;
+        state.loading = false;
+      })
       .addCase(getAllCriminals.pending, (state) => {
         state.error = null;
         state.loading = true;
@@ -29,10 +32,14 @@ const criminalSlice = createSlice({
       .addCase(getAllCriminals.rejected, (state, { payload: error }) => {
         state.loading = false;
       })
-      .addCase(createNewCriminal.fulfilled, (state, { payload: { payload } }) => {
-        state.criminals = [...state.criminals, payload?.payload?.criminals];
-        state.loading = false;
-      })
+      .addCase(
+        createNewCriminal.fulfilled,
+        (state, { payload: { payload } }) => {
+          console.log(payload);
+          state.criminals = [...state.criminals, payload?.criminal];
+          state.loading = false;
+        }
+      )
       .addCase(createNewCriminal.pending, (state) => {
         state.error = null;
         state.loading = true;
@@ -41,11 +48,12 @@ const criminalSlice = createSlice({
         state.loading = false;
         state.error = IdentifyErrorForCriminal(error);
       })
-      .addCase(deleteCriminal.fulfilled,(state, { payload: { payload } }) => {
-        let id = (payload.payload.criminals._id)
+      .addCase(deleteCriminal.fulfilled, (state, { payload: { payload } }) => {
+        console.log(payload);
+        let id = payload?.criminal?._id;
         state.criminals = state.criminals.filter((elem) => elem._id !== id);
         state.loading = false;
-        })
+      })
       .addCase(deleteCriminal.pending, (state) => {
         state.error = null;
         state.loading = true;
@@ -59,20 +67,18 @@ const criminalSlice = createSlice({
       })
       .addCase(updateCriminal.fulfilled, (state, action) => {
         state.loading = false;
-        state.criminals = state.criminals.map((elem)=>
-          elem._id === action.payload._id ? action.payload : elem        
-        )
+        state.criminals = state.criminals.map((elem) =>
+          elem._id === action.payload._id ? action.payload : elem
+        );
       })
       .addCase(updateCriminal.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message;
       })
-      .addCase(
-        checkCriminalStatus.fulfilled,(state, action) => {
-          state.loading = false;
-          state.message = action.payload.message;
-        }
-      )
+      .addCase(checkCriminalStatus.fulfilled, (state, action) => {
+        state.loading = false;
+        state.message = action.payload.message;
+      })
       .addCase(checkCriminalStatus.pending, (state) => {
         state.error = null;
         state.loading = true;
@@ -80,8 +86,7 @@ const criminalSlice = createSlice({
       .addCase(checkCriminalStatus.rejected, (state, { payload: error }) => {
         state.loading = false;
         state.message = error.message; // Assuming error.message contains a readable error message
-      })
-      
+      });
   },
 });
 

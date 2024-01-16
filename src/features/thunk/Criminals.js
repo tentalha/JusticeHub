@@ -45,9 +45,9 @@ export const deleteCriminal = createAsyncThunk(
 
 export const updateCriminal = createAsyncThunk(
   "updateCriminal",
-  async ({id, data}, { rejectWithValue }) => {
+  async ({ id, data }, { rejectWithValue }) => {
     try {
-      const response = await update_Criminal(id,data);
+      const response = await update_Criminal(id, data);
       return response?.data;
     } catch (error) {
       return rejectWithValue(error?.response?.data);

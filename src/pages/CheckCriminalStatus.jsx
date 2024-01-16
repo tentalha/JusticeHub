@@ -7,6 +7,7 @@ import InputMask from 'react-input-mask'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { checkCriminalStatusSchema } from 'schema/criminalSchema'
+import { Link } from 'react-router-dom'
 
 export const CheckCriminalStatus = () => {
   const dispatch = useDispatch()
@@ -22,12 +23,6 @@ export const CheckCriminalStatus = () => {
   })
 
   const criminalState = useSelector((state) => state.criminal)
-
-  // useEffect(() => {
-  //   if (criminalState.error) {
-  //     toast.error(criminalState.error)
-  //   }
-  // }, [criminalState.error])
 
   const handleFormSubmit = (data) => {
     const CNIC = data
